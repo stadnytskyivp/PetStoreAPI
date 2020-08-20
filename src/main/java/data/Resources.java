@@ -7,4 +7,10 @@ public class Resources {
         return res;
     }
 
+    public static String postPet() {
+        String res = "/v2/pet/";
+        return res;
+    }
+
+
 }
