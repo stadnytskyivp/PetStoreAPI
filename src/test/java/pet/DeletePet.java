@@ -2,7 +2,6 @@ package pet;
 
 import data.Resources;
 import dto.responses.pet.Pet;
-import dto.responses.pet.PetCategory;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -14,14 +13,12 @@ import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class AddPetTest {
+public class DeletePet {
 
     Properties properties = new Properties();
 
@@ -37,26 +34,6 @@ public class AddPetTest {
     public void getPetTest() {
         RestAssured.baseURI = properties.getProperty("PET_STORE_HOST");
 
-        PetCategory petCategory = new PetCategory();
-        petCategory.setId(666);
-        petCategory.setName("Imp");
-
-        List<String> photoUrls = new ArrayList();
-        photoUrls.add("https://vignette.wikia.nocookie.net/disciples-world/images/3/33/Imp.jpg/revision/" +
-                "latest?cb=20200125135519&path-prefix=ru");
-
-        List<PetCategory> tags = new ArrayList();
-        tags.add(petCategory);
-
-        Pet newPet = new Pet();
-        newPet.setId(669118);
-        newPet.setCategory(petCategory);
-        newPet.setName("Bilbo");
-        newPet.setPhotoUrls(photoUrls);
-        newPet.setTags(tags);
-        newPet.setStatus("available");
-
-
         RequestSpecification request = new RequestSpecBuilder()
                 .setBaseUri(properties.getProperty("PET_STORE_HOST"))
                 .setContentType(ContentType.JSON)
@@ -68,20 +45,22 @@ public class AddPetTest {
                 .build();
 
         RequestSpecification res = given()
-                .spec(request)
-                .body(newPet);
+                .spec(request);
 
-        Pet pet = res
+        String pet = res
                 .when()
-                .post(Resources.postPet())
+                .delete(Resources.getPetById("669118"))
                 .then()
                 .spec(resSpec)
                 .log()
                 .body()
-                .body("status", equalTo("available"))
+                .body("code", equalTo(200))
                 .extract()
                 .response()
-                .as(Pet.class);
+                .asString();
+
+        System.out.println(pet);
 
     }
+
 }
