@@ -1,4 +1,4 @@
-package dto.responses.pet;
+package dto.requests.pet;
 
 public class PetCategory {
 
@@ -9,15 +9,17 @@ public class PetCategory {
         return id;
     }
 
-    public void setId(int id) {
+    public PetCategory setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public PetCategory setName(String name) {
         this.name = name;
+        return this;
     }
 }

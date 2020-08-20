@@ -1,4 +1,4 @@
-package dto.responses.pet;
+package dto.requests.pet;
 
 import java.util.List;
 
@@ -15,47 +15,53 @@ public class Pet {
         return id;
     }
 
-    public void setId(int id) {
+    public Pet setId(int id) {
         this.id = id;
+        return this;
     }
 
     public PetCategory getCategory() {
         return category;
     }
 
-    public void setCategory(PetCategory category) {
+    public Pet setCategory(PetCategory category) {
         this.category = category;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Pet setName(String name) {
         this.name = name;
+        return this;
     }
 
     public List<String> getPhotoUrls() {
         return photoUrls;
     }
 
-    public void setPhotoUrls(List<String> photoUrls) {
+    public Pet setPhotoUrls(List<String> photoUrls) {
         this.photoUrls = photoUrls;
+        return this;
     }
 
     public List<PetCategory> getTags() {
         return tags;
     }
 
-    public void setTags(List<PetCategory> tags) {
+    public Pet setTags(List<PetCategory> tags) {
         this.tags = tags;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Pet setStatus(String status) {
         this.status = status;
+        return this;
     }
 }
