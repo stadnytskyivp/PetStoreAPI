@@ -20,9 +20,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AddPetTest extends AbstractTest {
 
-    private final String EXPECTED_NAME = "Bilbo";
-    private final String EXPECTED_STATUS = "available";
-    private final PetCategory EXPECTED_PetCategory = new PetCategory();
+    private static final String EXPECTED_NAME = "Bilbo";
+    private static final String EXPECTED_STATUS = "available";
+    private static PetCategory EXPECTED_PetCategory = new PetCategory();
 
     public static final Logger LOGGER = LoggerFactory.getLogger(AddPetTest.class);
 
