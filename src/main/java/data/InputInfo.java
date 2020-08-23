@@ -1,4 +1,4 @@
-package client;
+package data;
 
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
@@ -6,11 +6,9 @@ import dto.requests.pet.PetCategory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetClient {
+public class InputInfo {
 
-    private static PetClient instance;
-
-    private Pet PetClient(){
+    public static Pet postPet(){
 
         PetCategory petCategory = new PetCategory();
         petCategory.setId(666);
@@ -33,13 +31,6 @@ public class PetClient {
 
         return newPet;
 
-    }
-
-    public PetClient getInstance() {
-        if (instance == null){
-            instance = new PetClient();
-        }
-        return instance;
     }
 
 }
