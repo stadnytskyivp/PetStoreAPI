@@ -51,7 +51,7 @@ public class PetClient {
     public static Pet postPet(Pet petToPost) throws IOException {
 
         LOGGER.debug("sending request");
-        RequestSpecification res = given()
+        RequestSpecification res = RestAssured.given()
             .spec(buildReq())
 //            .log()
 //            .all()
@@ -65,7 +65,7 @@ public class PetClient {
             .spec(buildRes())
             .log()
             .body()
-            .body("status", equalTo("available"))
+            .body("status", Matchers.equalTo("available"))
             .extract()
             .response()
             .as(Pet.class);
@@ -77,7 +77,7 @@ public class PetClient {
     public static Pet getPetById() throws IOException {
 
         LOGGER.debug("sending request");
-        RequestSpecification res = given()
+        RequestSpecification res = RestAssured.given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
@@ -88,7 +88,7 @@ public class PetClient {
             .spec(buildRes())
             .log()
             .body()
-            .body("status", equalTo("available"))
+            .body("status", Matchers.equalTo("available"))
             .extract()
             .response()
             .as(Pet.class);
@@ -100,7 +100,7 @@ public class PetClient {
     public static DeleteRes deletePetById() throws IOException {
 
         LOGGER.debug("sending request");
-        RequestSpecification res = given()
+        RequestSpecification res = RestAssured.given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
@@ -111,7 +111,7 @@ public class PetClient {
             .spec(buildRes())
             .log()
             .body()
-            .body("code", equalTo(200))
+            .body("code", Matchers.equalTo(200))
             .extract()
             .response()
             .as(DeleteRes.class);
