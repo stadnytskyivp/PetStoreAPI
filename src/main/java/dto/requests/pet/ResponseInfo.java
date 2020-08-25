@@ -1,6 +1,6 @@
 package dto.requests.pet;
 
-public class DeleteRes {
+public class ResponseInfo {
 
     private int code;
     private String type;
@@ -10,7 +10,7 @@ public class DeleteRes {
         return code;
     }
 
-    public DeleteRes setCode(int code) {
+    public ResponseInfo setCode(int code) {
         this.code = code;
         return this;
     }
@@ -19,7 +19,7 @@ public class DeleteRes {
         return type;
     }
 
-    public DeleteRes setType(String type) {
+    public ResponseInfo setType(String type) {
         this.type = type;
         return this;
     }
@@ -28,7 +28,7 @@ public class DeleteRes {
         return message;
     }
 
-    public DeleteRes setMessage(String message) {
+    public ResponseInfo setMessage(String message) {
         this.message = message;
         return this;
     }

@@ -1,35 +1,42 @@
 package pet;
 
 import client.PetClient;
-import dto.requests.pet.Pet;
+import data.PetInfo;
+import dto.requests.pet.ResponseInfo;
+import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static data.PetInfo.postPet;
+public class FindPetNegativeTest {
 
-public class FindPetTest {
+    private static final int DEFUNCT_PET_ID = 666666;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(FindPetTest.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(FindPetNegativeTest.class);
 
-    @Test
-    public void getPetTest() throws IOException {
+    @Test(dataProvider = "defunctPet")
+    public void getDefunctPetTest(ResponseInfo messageInfo) throws IOException {
         LOGGER.info("START TEST find pet in the store");
 
-        Pet pet = PetClient.getPetById();
+        Response res = PetClient.getPetById(DEFUNCT_PET_ID, 404);
+        ResponseInfo response = res.as(ResponseInfo.class);
 
-        Assert.assertEquals(pet.getId(), postPet().getId());
-        Assert.assertEquals(pet.getName(), postPet().getName());
-        Assert.assertEquals(pet.getStatus(), postPet().getStatus());
-        Assert.assertEquals(pet.getCategory().getName(), postPet().getCategory().getName());
-        Assert.assertEquals(pet.getCategory().getId(), postPet().getCategory().getId());
-        Assert.assertEquals(pet.getPhotoUrls().toString(), postPet().getPhotoUrls().toString());
-        Assert.assertEquals(pet.getTags().size(), postPet().getTags().size());
+        Assert.assertEquals(response.getCode(), messageInfo.getCode());
+        Assert.assertEquals(response.getType(), messageInfo.getType());
+        Assert.assertEquals(response.getMessage(), messageInfo.getMessage());
 
         LOGGER.info("END TEST");
+    }
+
+    @DataProvider
+    public Object[][] defunctPet() {
+        return new Object[][]{
+            {PetInfo.messageResponse().setCode(1).setType("error").setMessage("Pet not found")}
+        };
     }
 
 }

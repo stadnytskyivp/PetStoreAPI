@@ -2,14 +2,12 @@ package data;
 
 public class Resources {
 
-    public static String getPetById(String petId) {
-        String res = "/v2/pet/" + petId;
-        return res;
+    public static String getPetById(long petId) {
+        return "/v2/pet/" + petId;
     }
 
     public static String postPet() {
-        String res = "/v2/pet/";
-        return res;
+        return "/v2/pet/";
     }
 
 

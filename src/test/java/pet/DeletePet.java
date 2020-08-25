@@ -1,7 +1,7 @@
 package pet;
 
 import client.PetClient;
-import dto.requests.pet.DeleteRes;
+import dto.requests.pet.ResponseInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -9,21 +9,32 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class DeletePet {
+import static data.PetInfo.messageResponse;
+import static data.PetInfo.addingPet;
 
-    private final String EXPECTED_TYPE = "unknown";
-    private final String EXPECTED_MESSAGE = "669118";
+public class DeletePet {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(DeletePet.class);
 
-    @Test
-    public void getPetTest() throws IOException {
+    @Test(priority = 1)
+    public void deletePetTest() throws IOException {
         LOGGER.info("START TEST delete pet from the store");
 
-        DeleteRes response = PetClient.deletePetById();
+        ResponseInfo response = PetClient.deletePetById(addingPet().getId());
 
-        Assert.assertEquals(response.getType(), EXPECTED_TYPE);
-        Assert.assertEquals(response.getMessage(), EXPECTED_MESSAGE);
+        Assert.assertEquals(response.getType(), messageResponse().getType());
+        Assert.assertEquals(response.getMessage(), messageResponse().getMessage());
+
+        LOGGER.info("END TEST");
+    }
+
+    @Test(priority = 2)
+    public void deleteDefunctPetTest() throws IOException {
+        LOGGER.info("START TEST delete pet defunct from the store");
+
+        ResponseInfo response = PetClient.deletePetById(addingPet().getId());
+
+        Assert.assertNull(response);
 
         LOGGER.info("END TEST");
     }

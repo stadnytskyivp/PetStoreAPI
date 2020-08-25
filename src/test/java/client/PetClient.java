@@ -1,22 +1,23 @@
 package client;
 
 import data.Resources;
-import dto.requests.pet.DeleteRes;
 import dto.requests.pet.Pet;
+import dto.requests.pet.ResponseInfo;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 public class PetClient {
 
@@ -43,7 +44,6 @@ public class PetClient {
         LOGGER.debug("building response specification ");
 
         return new ResponseSpecBuilder()
-            .expectStatusCode(200)
             .expectContentType(ContentType.JSON)
             .build();
     }
@@ -62,10 +62,10 @@ public class PetClient {
             .when()
             .post(Resources.postPet())
             .then()
+            .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
             .log()
             .body()
-            .body("status", Matchers.equalTo("available"))
             .extract()
             .response()
             .as(Pet.class);
@@ -74,47 +74,47 @@ public class PetClient {
 
     }
 
-    public static Pet getPetById() throws IOException {
+    public static Response getPetById(long petId, int statusCode) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
-        Pet pet = res
+        Response pet = res
             .when()
-            .get(Resources.getPetById("669118"))
+            .get(Resources.getPetById(petId))
             .then()
+            .statusCode(statusCode)
             .spec(buildRes())
             .log()
             .body()
-            .body("status", Matchers.equalTo("available"))
             .extract()
-            .response()
-            .as(Pet.class);
+            .response();
+//            .as(Pet.class);
 
         return pet;
 
     }
 
-    public static DeleteRes deletePetById() throws IOException {
+    public static ResponseInfo deletePetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
-        DeleteRes pet = res
+        ResponseInfo pet = res
             .when()
-            .delete(Resources.getPetById("669118"))
+            .delete(Resources.getPetById(petId))
             .then()
             .spec(buildRes())
             .log()
             .body()
-            .body("code", Matchers.equalTo(200))
+            .body("code", Matchers.equalTo(HttpStatus.SC_OK))
             .extract()
             .response()
-            .as(DeleteRes.class);
+            .as(ResponseInfo.class);
 
         return pet;
 

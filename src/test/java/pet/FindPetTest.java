@@ -1,8 +1,9 @@
 package pet;
 
 import client.PetClient;
+import data.PetInfo;
 import dto.requests.pet.Pet;
-import dto.requests.pet.PetCategory;
+import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -10,12 +11,9 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static data.PetInfo.addingPet;
+
 public class FindPetTest {
-
-    private final String EXPECTED_NAME = "Bilbo";
-    private final String EXPECTED_STATUS = "available";
-    private final PetCategory EXPECTED_PetCategory = new PetCategory();
-
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FindPetTest.class);
 
@@ -23,16 +21,18 @@ public class FindPetTest {
     public void getPetTest() throws IOException {
         LOGGER.info("START TEST find pet in the store");
 
-        EXPECTED_PetCategory.setId(666);
-        EXPECTED_PetCategory.setName("Imp");
+        Response res = PetClient.getPetById(PetInfo.addingPet().getId(), 200);
+        Pet pet = res.as(Pet.class);
 
-        Pet pet = PetClient.getPetById();
-
-        Assert.assertEquals(pet.getName(),EXPECTED_NAME);
-        Assert.assertEquals(pet.getStatus(),EXPECTED_STATUS);
-        Assert.assertEquals(pet.getCategory().getName(),EXPECTED_PetCategory.getName());
-        Assert.assertEquals(pet.getCategory().getId(),EXPECTED_PetCategory.getId());
+        Assert.assertEquals(pet.getId(), addingPet().getId());
+        Assert.assertEquals(pet.getName(), addingPet().getName());
+        Assert.assertEquals(pet.getStatus(), addingPet().getStatus());
+        Assert.assertEquals(pet.getCategory().getName(), addingPet().getCategory().getName());
+        Assert.assertEquals(pet.getCategory().getId(), addingPet().getCategory().getId());
+        Assert.assertEquals(pet.getPhotoUrls().toString(), addingPet().getPhotoUrls().toString());
+        Assert.assertEquals(pet.getTags().size(), addingPet().getTags().size());
 
         LOGGER.info("END TEST");
     }
+
 }
