@@ -1,11 +1,11 @@
 package client;
 
 import data.Resources;
+import dto.requests.pet.DeleteRes;
 import dto.requests.pet.Pet;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.slf4j.Logger;
@@ -97,14 +97,14 @@ public class PetClient {
 
     }
 
-    public static Response deletePetById() throws IOException {
+    public static DeleteRes deletePetById() throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
-        Response pet = res
+        DeleteRes pet = res
             .when()
             .delete(Resources.getPetById("669118"))
             .then()
@@ -113,7 +113,8 @@ public class PetClient {
             .body()
             .body("code", equalTo(200))
             .extract()
-            .response();
+            .response()
+            .as(DeleteRes.class);
 
         return pet;
 

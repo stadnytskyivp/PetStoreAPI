@@ -1,8 +1,11 @@
 package pet;
 
-import org.testng.annotations.Test;
+import client.PetClient;
+import dto.requests.pet.DeleteRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
@@ -17,8 +20,10 @@ public class DeletePet {
     public void getPetTest() throws IOException {
         LOGGER.info("START TEST delete pet from the store");
 
-//        Assert.assertEquals(pet.getBody("type"), EXPECTED_TYPE);
-//        Assert.assertEquals(pet.getStatus(), EXPECTED_MESSAGE);
+        DeleteRes response = PetClient.deletePetById();
+
+        Assert.assertEquals(response.getType(), EXPECTED_TYPE);
+        Assert.assertEquals(response.getMessage(), EXPECTED_MESSAGE);
 
         LOGGER.info("END TEST");
     }
