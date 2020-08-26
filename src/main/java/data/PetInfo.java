@@ -19,7 +19,7 @@ public class PetInfo {
         List<PetCategory> tags = new ArrayList();
         tags.add(petCategory);
 
-        return new Pet().setId((long) 669118)
+        return new Pet().setId(669118L)
             .setCategory(petCategory)
             .setName("Bilbo")
             .setPhotoUrls(photoUrls)
@@ -27,12 +27,20 @@ public class PetInfo {
             .setStatus("available");
     }
 
-    public static ResponseInfo messageResponse(){
+    public static ResponseInfo messageDelResponse() {
 
         return new ResponseInfo()
             .setCode(200)
             .setType("unknown")
             .setMessage("669118");
+    }
+
+    public static ResponseInfo messageNotFoundResponse() {
+
+        return new ResponseInfo()
+            .setCode(1)
+            .setType("error")
+            .setMessage("Pet not found");
     }
 
 }

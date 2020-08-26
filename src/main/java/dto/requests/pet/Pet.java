@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Pet {
 
-    private Long id;
+    private long id;
     private PetCategory category;
     private String name;
     private List<String> photoUrls;
@@ -15,7 +15,7 @@ public class Pet {
         return id;
     }
 
-    public Pet setId(Long id) {
+    public Pet setId(long id) {
         this.id = id;
         return this;
     }

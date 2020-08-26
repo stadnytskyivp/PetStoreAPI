@@ -1,9 +1,8 @@
 package pet;
 
 import client.PetClient;
-import data.PetInfo;
 import dto.requests.pet.Pet;
-import dto.requests.pet.PetCategory;
+import dto.requests.pet.ResponseInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -11,7 +10,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.Collections;
+
+import static data.PetInfo.messageNotFoundResponse;
 
 public class AddPetNegativeTest {
 
@@ -21,15 +21,12 @@ public class AddPetNegativeTest {
     public void getPetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add pet to the store ");
 
-        Pet response = PetClient.postPet(simplePet);
+        ResponseInfo response = PetClient.postNegativePet(simplePet);
 
-        Assert.assertEquals(response.getId(), simplePet.getId());
-        Assert.assertEquals(response.getName(), simplePet.getName());
-        Assert.assertEquals(response.getStatus(), simplePet.getStatus());
-        Assert.assertEquals(response.getCategory().getName(), simplePet.getCategory().getName());
-        Assert.assertEquals(response.getCategory().getId(), simplePet.getCategory().getId());
-        Assert.assertEquals(response.getPhotoUrls().toString(), simplePet.getPhotoUrls().toString());
-        Assert.assertEquals(response.getTags().size(), simplePet.getTags().size());
+        Assert.assertEquals(response.getCode(), messageNotFoundResponse().getCode());
+        Assert.assertEquals(response.getType(), messageNotFoundResponse().getType());
+        Assert.assertEquals(response.getMessage(), messageNotFoundResponse().getMessage());
+
 
         LOGGER.info("END TEST");
     }
@@ -37,11 +34,9 @@ public class AddPetNegativeTest {
     @DataProvider
     public Object[][] negativePet() {
         return new Object[][]{
-            {PetInfo.addingPet().setName(null)},
-            {PetInfo.addingPet().setCategory(new PetCategory())},
-            {PetInfo.addingPet().setPhotoUrls(Collections.emptyList())},
-            {PetInfo.addingPet().setTags(Collections.emptyList())},
-            {PetInfo.addingPet().setStatus(null)}
+//            {PetInfo.addingPet().setId(9223372036854775808L)},
+//            {PetInfo.addingPet().setName("")},
+            // to be continued
         };
     }
 

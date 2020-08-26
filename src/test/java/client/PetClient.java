@@ -11,7 +11,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,6 +47,13 @@ public class PetClient {
             .build();
     }
 
+    public static ResponseSpecification buildUncheckedRes() {
+        LOGGER.debug("building response specification ");
+
+        return new ResponseSpecBuilder()
+            .build();
+    }
+
     public static Pet postPet(Pet petToPost) throws IOException {
 
         LOGGER.debug("sending request");
@@ -58,7 +64,8 @@ public class PetClient {
             .body(petToPost);
 
         LOGGER.debug("expecting response");
-        Pet pet = res
+
+        return res
             .when()
             .post(Resources.postPet())
             .then()
@@ -69,31 +76,48 @@ public class PetClient {
             .extract()
             .response()
             .as(Pet.class);
-
-        return pet;
-
     }
 
-    public static Response getPetById(long petId, int statusCode) throws IOException {
+    public static ResponseInfo postNegativePet(Pet petToPost) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq())
+            .log()
+            .all()
+            .body(petToPost);
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .post(Resources.postPet())
+            .then()
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
+    }
+
+    public static Response getPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
-        Response pet = res
+
+        return res
             .when()
             .get(Resources.getPetById(petId))
             .then()
-            .statusCode(statusCode)
             .spec(buildRes())
             .log()
             .body()
             .extract()
             .response();
-//            .as(Pet.class);
-
-        return pet;
 
     }
 
@@ -104,21 +128,38 @@ public class PetClient {
             .spec(buildReq());
 
         LOGGER.debug("expecting response");
-        ResponseInfo pet = res
+
+        return res
             .when()
             .delete(Resources.getPetById(petId))
             .then()
-            .spec(buildRes())
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildUncheckedRes())
             .log()
             .body()
-            .body("code", Matchers.equalTo(HttpStatus.SC_OK))
             .extract()
             .response()
             .as(ResponseInfo.class);
-
-        return pet;
-
     }
 
+    public static Response deleteDefunctPetById(long petId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .delete(Resources.getPetById(petId))
+            .then()
+            .statusCode(HttpStatus.SC_NOT_FOUND)
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response();
+    }
 
 }

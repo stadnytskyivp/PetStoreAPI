@@ -9,32 +9,22 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static data.PetInfo.messageResponse;
 import static data.PetInfo.addingPet;
+import static data.PetInfo.messageDelResponse;
 
 public class DeletePet {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(DeletePet.class);
 
-    @Test(priority = 1)
-    public void deletePetTest() throws IOException {
+    @Test
+    public static void deletePetTest() throws IOException {
         LOGGER.info("START TEST delete pet from the store");
 
         ResponseInfo response = PetClient.deletePetById(addingPet().getId());
 
-        Assert.assertEquals(response.getType(), messageResponse().getType());
-        Assert.assertEquals(response.getMessage(), messageResponse().getMessage());
-
-        LOGGER.info("END TEST");
-    }
-
-    @Test(priority = 2)
-    public void deleteDefunctPetTest() throws IOException {
-        LOGGER.info("START TEST delete pet defunct from the store");
-
-        ResponseInfo response = PetClient.deletePetById(addingPet().getId());
-
-        Assert.assertNull(response);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(response.getType(), messageDelResponse().getType());
+        Assert.assertEquals(response.getMessage(), messageDelResponse().getMessage());
 
         LOGGER.info("END TEST");
     }

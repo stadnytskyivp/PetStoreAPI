@@ -21,7 +21,7 @@ public class FindPetTest {
     public void getPetTest() throws IOException {
         LOGGER.info("START TEST find pet in the store");
 
-        Response res = PetClient.getPetById(PetInfo.addingPet().getId(), 200);
+        Response res = PetClient.getPetById(PetInfo.addingPet().getId());
         Pet pet = res.as(Pet.class);
 
         Assert.assertEquals(pet.getId(), addingPet().getId());
