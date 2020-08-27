@@ -2,8 +2,6 @@ package pet;
 
 import client.PetClient;
 import io.restassured.response.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,9 +9,7 @@ import java.io.IOException;
 
 import static data.PetInfo.addingPet;
 
-public class DeleteDefunctPet {
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(DeletePet.class);
+public class DeleteDefunctPetTest extends AbstractTest {
 
     @Test
     public void deleteDefunctPetTest() throws IOException {
@@ -21,7 +17,7 @@ public class DeleteDefunctPet {
 
         LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
         AddPetTest.addPetTest(addingPet());
-        DeletePet.deletePetTest();
+        DeletePetTest.deletePetTest();
 
         Response response = PetClient.deleteDefunctPetById(addingPet().getId());
 

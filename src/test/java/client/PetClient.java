@@ -11,16 +11,13 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pet.AbstractTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PetClient {
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(PetClient.class);
+public class PetClient extends AbstractTest {
 
     public static String getBaseUrl(String hostName) throws IOException {
         Properties properties = new Properties();
