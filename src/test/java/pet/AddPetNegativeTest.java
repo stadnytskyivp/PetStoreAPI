@@ -2,7 +2,7 @@ package pet;
 
 import client.PetClient;
 import dto.requests.pet.Pet;
-import dto.requests.pet.ResponseInfo;
+import dto.requests.pet.PetCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static data.PetInfo.messageNotFoundResponse;
+import static data.PetInfo.addingPet;
 
 public class AddPetNegativeTest {
 
@@ -21,12 +21,14 @@ public class AddPetNegativeTest {
     public void getPetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add pet to the store ");
 
-        ResponseInfo response = PetClient.postNegativePet(simplePet);
+        Pet response = PetClient.postPet(simplePet);
 
-        Assert.assertEquals(response.getCode(), messageNotFoundResponse().getCode());
-        Assert.assertEquals(response.getType(), messageNotFoundResponse().getType());
-        Assert.assertEquals(response.getMessage(), messageNotFoundResponse().getMessage());
-
+        Assert.assertEquals(response.getName(), simplePet.getName());
+        Assert.assertEquals(response.getStatus(), simplePet.getStatus());
+        Assert.assertEquals(response.getCategory().getName(), simplePet.getCategory().getName());
+        Assert.assertEquals(response.getCategory().getId(), simplePet.getCategory().getId());
+        Assert.assertEquals(response.getPhotoUrls().toString(), simplePet.getPhotoUrls().toString());
+        Assert.assertEquals(response.getTags().size(), simplePet.getTags().size());
 
         LOGGER.info("END TEST");
     }
@@ -34,8 +36,8 @@ public class AddPetNegativeTest {
     @DataProvider
     public Object[][] negativePet() {
         return new Object[][]{
-//            {PetInfo.addingPet().setId(9223372036854775808L)},
-//            {PetInfo.addingPet().setName("")},
+            {addingPet().setName("ABC abc 123 !@# ЙЦУ йцу ♀♪♂ 中华人民共和国")},
+            {addingPet().setCategory(new PetCategory().setName("ABC abc 123 !@# ЙЦУ йцу ♀♪♂ 中华人民共和国"))},
             // to be continued
         };
     }

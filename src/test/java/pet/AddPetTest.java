@@ -1,7 +1,6 @@
 package pet;
 
 import client.PetClient;
-import data.PetInfo;
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import org.slf4j.Logger;
@@ -12,6 +11,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Collections;
+
+import static data.PetInfo.addingPet;
 
 public class AddPetTest {
 
@@ -37,15 +38,15 @@ public class AddPetTest {
     @DataProvider
     public Object[][] positiveTests() {
         return new Object[][]{
-            {PetInfo.addingPet()},
-            {PetInfo.addingPet().setName(null)},
-            {PetInfo.addingPet().setCategory(new PetCategory())},
-            {PetInfo.addingPet().setPhotoUrls(Collections.emptyList())},
-            {PetInfo.addingPet().setTags(Collections.emptyList())},
-            {PetInfo.addingPet().setStatus(null)},
-            {PetInfo.addingPet().setId(0)},
-            {PetInfo.addingPet().setId(-9223372036854775808L)},
-            {PetInfo.addingPet().setId(9223372036854775807L)},
+            {addingPet()},
+            {addingPet().setName(null)},
+            {addingPet().setCategory(new PetCategory())},
+            {addingPet().setPhotoUrls(Collections.emptyList())},
+            {addingPet().setTags(Collections.emptyList())},
+            {addingPet().setStatus(null)},
+            {addingPet().setId(0)},
+            {addingPet().setId(-9223372036854775808L)},
+            {addingPet().setId(9223372036854775807L)},
             // to be continued
         };
     }
