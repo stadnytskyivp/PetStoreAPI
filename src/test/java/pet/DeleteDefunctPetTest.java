@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static client.PetClient.deletePetById;
+import static client.PetClient.postPet;
 import static data.PetInfo.addingPet;
 
 public class DeleteDefunctPetTest extends AbstractTest {
@@ -16,8 +18,8 @@ public class DeleteDefunctPetTest extends AbstractTest {
         LOGGER.info("START TEST try to delete defunct pet");
 
         LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
-        AddPetTest.addPetTest(addingPet());
-        DeletePetTest.deletePetTest();
+        postPet(addingPet());
+        deletePetById(addingPet().getId());
 
         Response response = PetClient.deleteDefunctPetById(addingPet().getId());
 

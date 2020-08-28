@@ -14,8 +14,4 @@ public class ReusableMethods {
         return properties.toString();
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println(getBigData());
-    }
-
 }

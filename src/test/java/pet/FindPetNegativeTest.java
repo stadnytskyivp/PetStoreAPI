@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static client.PetClient.deletePetById;
+import static client.PetClient.postPet;
 import static data.PetInfo.addingPet;
 import static data.PetInfo.messageNotFoundResponse;
 
@@ -18,8 +20,8 @@ public class FindPetNegativeTest extends AbstractTest {
         LOGGER.info("START TEST find pet in the store");
 
         LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
-        AddPetTest.addPetTest(addingPet());
-        DeletePetTest.deletePetTest();
+        postPet(addingPet());
+        deletePetById(addingPet().getId());
 
         Response res = PetClient.getPetById(addingPet().getId());
         ResponseInfo response = res.as(ResponseInfo.class);
