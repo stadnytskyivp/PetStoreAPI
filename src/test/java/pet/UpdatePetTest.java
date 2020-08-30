@@ -4,7 +4,7 @@ import client.PetClient;
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,55 +12,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static client.PetClient.deletePetById;
+import static client.PetClient.postPet;
 import static data.PetInfo.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class AddPetTest extends AbstractTest {
+public class UpdatePetTest extends AbstractTest {
 
-    private long petId;
+    @BeforeTest
+    public void removeAddedPet() throws IOException {
+        LOGGER.info("BEFORE TEST adding a pet");
+
+        postPet(addingPet());
+
+        LOGGER.info("BEFORE TEST pet is added");
+    }
 
     @Test(dataProvider = "positiveTests")
-    public void addPetTest(Pet simplePet) throws IOException {
+    public static void addPetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add pet to the store ");
 
         Pet response = PetClient.postPet(simplePet);
 
-        Assert.assertNotNull(response.getId());
         Assert.assertEquals(response.getName(), simplePet.getName());
         Assert.assertEquals(response.getStatus(), simplePet.getStatus());
-        Assert.assertEquals(response.getCategory().getName(), simplePet.getCategory().getName());
-        Assert.assertEquals(response.getCategory().getId(), simplePet.getCategory().getId());
+        Assert.assertEquals(response.getCategory(), simplePet.getCategory());
         Assert.assertEquals(response.getPhotoUrls().toString(), simplePet.getPhotoUrls().toString());
         Assert.assertEquals(response.getTags(), simplePet.getTags());
 
         LOGGER.info("END TEST");
-
-        setPetId(response.getId());
-    }
-
-    @AfterMethod
-    public void removeAddedPet() throws IOException {
-        LOGGER.info("AFTER TEST REMOVING PET");
-
-        deletePetById(getPetId());
-
-        LOGGER.info("AFTER TEST PET REMOVED");
     }
 
     @DataProvider
     public Object[][] positiveTests() throws IOException {
         return new Object[][]{
-            {addingPet()},
             {addingPet().setName(null)},
             {addingPet().setCategory(new PetCategory())},
             {addingPet().setPhotoUrls(Collections.emptyList())},
-            {addingPet().setTags(new ArrayList<PetCategory>())},
             {addingPet().setTags(Collections.emptyList())},
             {addingPet().setStatus(null)},
-            {addingPet().setId(0)},
-            {addingPet().setId(-9223372036854775808L)},
-            {addingPet().setId(9223372036854775807L)},
             {addingPet().setName(getBigData())},
             {addingPet().setCategory(new PetCategory().setName(getBigData()))},
             {addingPet().setTags(new ArrayList<PetCategory>()).setName(getBigData())},
@@ -68,14 +57,5 @@ public class AddPetTest extends AbstractTest {
             {addingPet().setPhotoUrls(Collections.emptyList()).setName(getBigData())},
             // to be continued
         };
-    }
-
-    public long getPetId() {
-        return petId;
-    }
-
-    public AddPetTest setPetId(long petId) {
-        this.petId = petId;
-        return this;
     }
 }
