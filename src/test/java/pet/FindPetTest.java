@@ -23,8 +23,7 @@ public class FindPetTest extends AbstractTest {
         Assert.assertEquals(pet.getId(), addingPet().getId());
         Assert.assertEquals(pet.getName(), addingPet().getName());
         Assert.assertEquals(pet.getStatus(), addingPet().getStatus());
-        Assert.assertEquals(pet.getCategory().getName(), addingPet().getCategory().getName());
-        Assert.assertEquals(pet.getCategory().getId(), addingPet().getCategory().getId());
+        Assert.assertEquals(pet.getCategory(), addingPet().getCategory());
         Assert.assertEquals(pet.getPhotoUrls().toString(), addingPet().getPhotoUrls().toString());
         Assert.assertEquals(pet.getTags().getClass(), pet.getTags().getClass());
 

@@ -1,6 +1,7 @@
 package client;
 
 import data.Resources;
+import dto.requests.EStatus;
 import dto.requests.pet.Pet;
 import dto.requests.pet.ResponseInfo;
 import io.restassured.RestAssured;
@@ -75,29 +76,6 @@ public class PetClient extends AbstractTest {
             .as(Pet.class);
     }
 
-    public static ResponseInfo postNegativePet(Pet petToPost) throws IOException {
-
-        LOGGER.debug("sending request");
-        RequestSpecification res = RestAssured.given()
-            .spec(buildReq())
-            .log()
-            .all()
-            .body(petToPost);
-
-        LOGGER.debug("expecting response");
-
-        return res
-            .when()
-            .post(Resources.postPet())
-            .then()
-            .spec(buildRes())
-            .log()
-            .body()
-            .extract()
-            .response()
-            .as(ResponseInfo.class);
-    }
-
     public static Response getPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
@@ -115,7 +93,6 @@ public class PetClient extends AbstractTest {
             .body()
             .extract()
             .response();
-
     }
 
     public static ResponseInfo deletePetById(long petId) throws IOException {
@@ -155,6 +132,24 @@ public class PetClient extends AbstractTest {
             .spec(buildUncheckedRes())
             .log()
             .body()
+            .extract()
+            .response();
+    }
+
+    public static Response getPetByStatus(EStatus petStatus) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .get(Resources.getPetByStatus(petStatus.toString()))
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
             .extract()
             .response();
     }

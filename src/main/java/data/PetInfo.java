@@ -1,8 +1,8 @@
 package data;
 
-import dto.requests.pet.ResponseInfo;
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
+import dto.requests.pet.ResponseInfo;
 
 import java.util.ArrayList;
 import java.util.List;
