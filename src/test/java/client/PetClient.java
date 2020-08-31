@@ -4,6 +4,7 @@ import data.Resources;
 import dto.requests.EStatus;
 import dto.requests.pet.Pet;
 import dto.requests.pet.ResponseInfo;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -20,6 +21,7 @@ import java.util.Properties;
 
 public class PetClient extends AbstractTest {
 
+    @Step("Getting base URL")
     public static String getBaseUrl(String hostName) throws IOException {
         Properties properties = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
@@ -28,6 +30,7 @@ public class PetClient extends AbstractTest {
         return properties.getProperty(hostName);
     }
 
+    @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
         LOGGER.debug("building request specification ");
 
@@ -37,6 +40,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Building response specification")
     public static ResponseSpecification buildRes() {
         LOGGER.debug("building response specification ");
 
@@ -45,6 +49,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Building response specification without any response checking")
     public static ResponseSpecification buildUncheckedRes() {
         LOGGER.debug("building response specification ");
 
@@ -52,6 +57,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Adding pet to the store")
     public static Pet postPet(Pet petToPost) throws IOException {
 
         LOGGER.debug("sending request");
@@ -76,6 +82,7 @@ public class PetClient extends AbstractTest {
             .as(Pet.class);
     }
 
+    @Step("Getting pet by ID {0}")
     public static Response getPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
@@ -95,6 +102,7 @@ public class PetClient extends AbstractTest {
             .response();
     }
 
+    @Step("Deleting pet by ID {0}")
     public static ResponseInfo deletePetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
@@ -116,6 +124,7 @@ public class PetClient extends AbstractTest {
             .as(ResponseInfo.class);
     }
 
+    @Step("Deleting defunct pet by ID {0}")
     public static Response deleteDefunctPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
@@ -136,6 +145,7 @@ public class PetClient extends AbstractTest {
             .response();
     }
 
+    @Step("Getting list of pets with specific status {0}")
     public static Response getPetByStatus(EStatus petStatus) throws IOException {
 
         LOGGER.debug("sending request");
