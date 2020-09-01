@@ -3,9 +3,11 @@ package pet;
 import client.PetClient;
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public class AddPetTest extends AbstractTest {
 
     private long petId;
 
+    @Description("Verify that we are adding pet to the store")
+    @Parameters({"Pet for adding"})
     @Test(dataProvider = "positiveTests")
     public void addPetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add pet to the store ");

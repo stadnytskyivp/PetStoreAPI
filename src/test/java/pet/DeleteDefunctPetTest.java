@@ -1,8 +1,10 @@
 package pet;
 
 import client.PetClient;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import static data.PetInfo.addingPet;
 
 public class DeleteDefunctPetTest extends AbstractTest {
 
+    @Description("Verify that we will get error trying delete defunct pet")
     @Test
     public void deleteDefunctPetTest() throws IOException {
         LOGGER.info("START TEST try to delete defunct pet");

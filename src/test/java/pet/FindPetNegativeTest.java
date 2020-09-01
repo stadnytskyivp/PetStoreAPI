@@ -2,8 +2,10 @@ package pet;
 
 import client.PetClient;
 import dto.requests.pet.ResponseInfo;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ import static data.PetInfo.messageNotFoundResponse;
 
 public class FindPetNegativeTest extends AbstractTest {
 
+    @Description("Verify that we will get error message by getting defunct pet by id")
     @Test
     public void getDefunctPetTest() throws IOException {
         LOGGER.info("START TEST find pet in the store");
