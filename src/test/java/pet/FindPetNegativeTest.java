@@ -3,9 +3,7 @@ package pet;
 import client.PetClient;
 import dto.requests.pet.ResponseInfo;
 import io.qameta.allure.Description;
-import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -26,12 +24,11 @@ public class FindPetNegativeTest extends AbstractTest {
         postPet(addingPet());
         deletePetById(addingPet().getId());
 
-        Response res = PetClient.getPetById(addingPet().getId());
-        ResponseInfo response = res.as(ResponseInfo.class);
+        ResponseInfo res = PetClient.getNonExistingPetById(addingPet().getId());
 
-        Assert.assertEquals(response.getCode(), messageNotFoundResponse().getCode());
-        Assert.assertEquals(response.getType(), messageNotFoundResponse().getType());
-        Assert.assertEquals(response.getMessage(), messageNotFoundResponse().getMessage());
+        Assert.assertEquals(res.getCode(), messageNotFoundResponse().getCode());
+        Assert.assertEquals(res.getType(), messageNotFoundResponse().getType());
+        Assert.assertEquals(res.getMessage(), messageNotFoundResponse().getMessage());
 
         LOGGER.info("END TEST");
     }

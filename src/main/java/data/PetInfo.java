@@ -4,7 +4,8 @@ import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import dto.requests.pet.ResponseInfo;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PetInfo {
@@ -12,12 +13,9 @@ public class PetInfo {
     public static Pet addingPet() {
         PetCategory petCategory = new PetCategory().setId(666).setName("Imp");
 
-        List<String> photoUrls = new ArrayList();
-        photoUrls.add("https://vignette.wikia.nocookie.net/disciples-world/images/3/33/Imp.jpg/revision/" +
+        List<String> photoUrls = Collections.singletonList("https://vignette.wikia.nocookie.net/disciples-world/images/3/33/Imp.jpg/revision/" +
             "latest?cb=20200125135519&path-prefix=ru");
-
-        List<PetCategory> tags = new ArrayList();
-        tags.add(petCategory);
+        List<PetCategory> tags = Arrays.asList(petCategory, petCategory);
 
         return new Pet().setId(669118L)
             .setCategory(petCategory)

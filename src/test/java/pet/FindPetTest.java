@@ -4,9 +4,7 @@ import client.PetClient;
 import data.PetInfo;
 import dto.requests.pet.Pet;
 import io.qameta.allure.Description;
-import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,8 +18,7 @@ public class FindPetTest extends AbstractTest {
     public void getPetTest() throws IOException {
         LOGGER.info("START TEST find pet in the store");
 
-        Response res = PetClient.getPetById(PetInfo.addingPet().getId());
-        Pet pet = res.as(Pet.class);
+        Pet pet = PetClient.getPetById(PetInfo.addingPet().getId());
 
         Assert.assertEquals(pet.getId(), addingPet().getId());
         Assert.assertEquals(pet.getName(), addingPet().getName());

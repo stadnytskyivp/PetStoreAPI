@@ -17,7 +17,7 @@ import pet.AbstractTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.*;
 
 public class PetClient extends AbstractTest {
 
@@ -83,7 +83,7 @@ public class PetClient extends AbstractTest {
     }
 
     @Step("Getting pet by ID {0}")
-    public static Response getPetById(long petId) throws IOException {
+    public static Pet getPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -99,7 +99,29 @@ public class PetClient extends AbstractTest {
             .log()
             .body()
             .extract()
-            .response();
+            .response()
+            .as(Pet.class);
+    }
+
+    @Step("Getting non existing pet by ID {0}")
+    public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .get(Resources.getPetById(petId))
+            .then()
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
     }
 
     @Step("Deleting pet by ID {0}")
@@ -125,7 +147,7 @@ public class PetClient extends AbstractTest {
     }
 
     @Step("Deleting defunct pet by ID {0}")
-    public static Response deleteDefunctPetById(long petId) throws IOException {
+    public static Response deleteNonExistingPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -146,7 +168,7 @@ public class PetClient extends AbstractTest {
     }
 
     @Step("Getting list of pets with specific status {0}")
-    public static Response getPetByStatus(EStatus petStatus) throws IOException {
+    public static List<Pet> getPetByStatus(EStatus petStatus) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -154,14 +176,15 @@ public class PetClient extends AbstractTest {
 
         LOGGER.debug("expecting response");
 
-        return res
+        return Arrays.asList(res
             .when()
-            .get(Resources.getPetByStatus(petStatus.toString()))
+            .get(Resources.getPetByStatus(petStatus.getStatus()))
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
             .extract()
-            .response();
+            .response()
+            .as(Pet[].class));
     }
 
 }

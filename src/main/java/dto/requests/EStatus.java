@@ -12,8 +12,8 @@ public enum EStatus {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(status);
+    public String getStatus() {
+        return status;
     }
+
 }

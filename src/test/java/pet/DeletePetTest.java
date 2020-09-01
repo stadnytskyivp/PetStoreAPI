@@ -4,15 +4,25 @@ import client.PetClient;
 import dto.requests.pet.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static client.PetClient.postPet;
 import static data.PetInfo.addingPet;
 import static data.PetInfo.messageDelResponse;
 
 public class DeletePetTest extends AbstractTest {
+
+    @BeforeTest
+    public void removeAddedPet() throws IOException {
+        LOGGER.info("BEFORE TEST adding a pet");
+
+        postPet(addingPet());
+
+        LOGGER.info("BEFORE TEST pet is added");
+    }
 
     @Description("Verify that we are deleting pet")
     @Test
