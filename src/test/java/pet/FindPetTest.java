@@ -5,13 +5,24 @@ import data.PetInfo;
 import dto.requests.pet.Pet;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static client.PetClient.postPet;
 import static data.PetInfo.addingPet;
 
 public class FindPetTest extends AbstractTest {
+
+    @BeforeMethod
+    public void removeAddedPet() throws IOException {
+        LOGGER.info("BEFORE TEST adding a pet");
+
+        postPet(addingPet());
+
+        LOGGER.info("BEFORE TEST pet is added");
+    }
 
     @Description("Verify that we are getting pets by id")
     @Test

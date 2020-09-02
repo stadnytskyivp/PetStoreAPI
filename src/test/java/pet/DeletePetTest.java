@@ -4,6 +4,7 @@ import client.PetClient;
 import dto.requests.pet.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ import static data.PetInfo.messageDelResponse;
 
 public class DeletePetTest extends AbstractTest {
 
-    @BeforeTest
+    @BeforeMethod
     public void removeAddedPet() throws IOException {
         LOGGER.info("BEFORE TEST adding a pet");
 
