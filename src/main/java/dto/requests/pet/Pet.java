@@ -11,7 +11,7 @@ public class Pet {
     private List<PetCategory> tags;
     private String status;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

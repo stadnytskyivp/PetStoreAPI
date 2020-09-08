@@ -1,8 +1,10 @@
 package client;
 
 import data.Resources;
+import dto.requests.EStatus;
 import dto.requests.pet.Pet;
 import dto.requests.pet.ResponseInfo;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -15,10 +17,11 @@ import pet.AbstractTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.*;
 
 public class PetClient extends AbstractTest {
 
+    @Step("Getting base URL")
     public static String getBaseUrl(String hostName) throws IOException {
         Properties properties = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
@@ -27,6 +30,7 @@ public class PetClient extends AbstractTest {
         return properties.getProperty(hostName);
     }
 
+    @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
         LOGGER.debug("building request specification ");
 
@@ -36,6 +40,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Building response specification")
     public static ResponseSpecification buildRes() {
         LOGGER.debug("building response specification ");
 
@@ -44,6 +49,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Building response specification without any response checking")
     public static ResponseSpecification buildUncheckedRes() {
         LOGGER.debug("building response specification ");
 
@@ -51,6 +57,7 @@ public class PetClient extends AbstractTest {
             .build();
     }
 
+    @Step("Adding pet to the store")
     public static Pet postPet(Pet petToPost) throws IOException {
 
         LOGGER.debug("sending request");
@@ -75,30 +82,8 @@ public class PetClient extends AbstractTest {
             .as(Pet.class);
     }
 
-    public static ResponseInfo postNegativePet(Pet petToPost) throws IOException {
-
-        LOGGER.debug("sending request");
-        RequestSpecification res = RestAssured.given()
-            .spec(buildReq())
-            .log()
-            .all()
-            .body(petToPost);
-
-        LOGGER.debug("expecting response");
-
-        return res
-            .when()
-            .post(Resources.postPet())
-            .then()
-            .spec(buildRes())
-            .log()
-            .body()
-            .extract()
-            .response()
-            .as(ResponseInfo.class);
-    }
-
-    public static Response getPetById(long petId) throws IOException {
+    @Step("Getting pet by ID {0}")
+    public static Pet getPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -114,10 +99,32 @@ public class PetClient extends AbstractTest {
             .log()
             .body()
             .extract()
-            .response();
-
+            .response()
+            .as(Pet.class);
     }
 
+    @Step("Getting non existing pet by ID {0}")
+    public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .get(Resources.getPetById(petId))
+            .then()
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
+    }
+
+    @Step("Deleting pet by ID {0}")
     public static ResponseInfo deletePetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
@@ -139,7 +146,8 @@ public class PetClient extends AbstractTest {
             .as(ResponseInfo.class);
     }
 
-    public static Response deleteDefunctPetById(long petId) throws IOException {
+    @Step("Deleting defunct pet by ID {0}")
+    public static Response deleteNonExistingPetById(long petId) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -157,6 +165,26 @@ public class PetClient extends AbstractTest {
             .body()
             .extract()
             .response();
+    }
+
+    @Step("Getting list of pets with specific status {0}")
+    public static List<Pet> getPetByStatus(EStatus petStatus) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return Arrays.asList(res
+            .when()
+            .get(Resources.getPetByStatus(petStatus.getStatus()))
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
+            .extract()
+            .response()
+            .as(Pet[].class));
     }
 
 }
