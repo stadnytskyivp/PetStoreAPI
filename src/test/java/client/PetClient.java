@@ -25,7 +25,7 @@ public class PetClient extends AbstractTest {
     public static String getBaseUrl(String hostName) throws IOException {
         Properties properties = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
-            "\\src\\main\\resources\\env.properties");
+            "/src/main/resources/env.properties");
         properties.load(fis);
         return properties.getProperty(hostName);
     }
