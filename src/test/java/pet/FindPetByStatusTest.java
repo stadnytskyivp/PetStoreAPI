@@ -1,7 +1,7 @@
 package pet;
 
 import client.PetClient;
-import dto.requests.EStatus;
+import enums.EStatus;
 import dto.requests.pet.Pet;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;

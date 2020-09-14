@@ -1,7 +1,6 @@
 package client;
 
-import data.Resources;
-import dto.requests.EStatus;
+import enums.EStatus;
 import dto.requests.pet.Pet;
 import dto.requests.pet.ResponseInfo;
 import io.qameta.allure.Step;
@@ -20,6 +19,9 @@ import java.io.IOException;
 import java.util.*;
 
 public class PetClient extends AbstractTest {
+
+    final private static String PET_PARAMETER = "/v2/pet/";
+    final private static String PET_FIND_BY_STATUS_PARAMETER = "/v2/pet/findByStatus?status=";
 
     @Step("Getting base URL")
     public static String getBaseUrl(String hostName) throws IOException {
@@ -63,15 +65,13 @@ public class PetClient extends AbstractTest {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq())
-//            .log()
-//            .all()
             .body(petToPost);
 
         LOGGER.debug("expecting response");
 
         return res
             .when()
-            .post(Resources.postPet())
+            .post(PET_PARAMETER)
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
@@ -93,7 +93,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .get(Resources.getPetById(petId))
+            .get(PET_PARAMETER + petId)
             .then()
             .spec(buildRes())
             .log()
@@ -114,7 +114,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .get(Resources.getPetById(petId))
+            .get(PET_PARAMETER + petId)
             .then()
             .spec(buildRes())
             .log()
@@ -135,7 +135,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .delete(Resources.getPetById(petId))
+            .delete(PET_PARAMETER + petId)
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildUncheckedRes())
@@ -157,7 +157,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .delete(Resources.getPetById(petId))
+            .delete(PET_PARAMETER + petId)
             .then()
             .statusCode(HttpStatus.SC_NOT_FOUND)
             .spec(buildUncheckedRes())
@@ -178,7 +178,7 @@ public class PetClient extends AbstractTest {
 
         return Arrays.asList(res
             .when()
-            .get(Resources.getPetByStatus(petStatus.getStatus()))
+            .get(PET_FIND_BY_STATUS_PARAMETER + petStatus.getStatus())
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
