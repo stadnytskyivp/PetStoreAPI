@@ -59,7 +59,6 @@ public class UpdatePetTest extends AbstractTest {
             {addingPet().setTags(new ArrayList<PetCategory>()).setName(getBigData())},
             {addingPet().setStatus(getBigData())},
             {addingPet().setPhotoUrls(Collections.emptyList()).setName(getBigData())},
-            // to be continued
         };
     }
 }

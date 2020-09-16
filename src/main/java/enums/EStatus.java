@@ -1,4 +1,4 @@
-package dto.requests;
+package enums;
 
 public enum EStatus {
 

@@ -5,7 +5,6 @@ import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -19,8 +18,6 @@ import static data.PetInfo.addingPet;
 import static data.ReusableMethods.getBigData;
 
 public class AddPetTest extends AbstractTest {
-
-    private long petId;
 
     @Description("Verify that we are adding pet to the store")
     @Parameters({"Pet for adding"})
@@ -40,16 +37,11 @@ public class AddPetTest extends AbstractTest {
 
         LOGGER.info("END TEST");
 
-        setPetId(response.getId());
-    }
+        LOGGER.info("AFTER TEST DELETING PET");
 
-    @AfterMethod
-    public void removeAddedPet() throws IOException {
-        LOGGER.info("AFTER TEST REMOVING PET");
+        deletePetById(response.getId());
 
-        deletePetById(getPetId());
-
-        LOGGER.info("AFTER TEST PET REMOVED");
+        LOGGER.info("AFTER TEST PET DELETED");
     }
 
     @DataProvider
@@ -73,12 +65,4 @@ public class AddPetTest extends AbstractTest {
         };
     }
 
-    public long getPetId() {
-        return petId;
-    }
-
-    public AddPetTest setPetId(long petId) {
-        this.petId = petId;
-        return this;
-    }
 }

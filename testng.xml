@@ -10,6 +10,7 @@
             <class name="pet.FindPetNegativeTest"/>
             <class name="pet.FindPetTest"/>
             <class name="pet.UpdatePetTest"/>
+            <class name="pet.AddPetPhotoTest"/>
         </classes>
     </test>
 </suite>
