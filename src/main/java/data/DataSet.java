@@ -3,6 +3,7 @@ package data;
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import dto.requests.ResponseInfo;
+import dto.requests.store.Order;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,6 +40,17 @@ public class DataSet {
             .setCode(1)
             .setType("error")
             .setMessage("Pet not found");
+    }
+
+    public static Order addingOrder() {
+
+        return new Order()
+            .setId(1992)
+            .setPetId(669118)
+            .setQuantity(1)
+            .setShipDate("03.11.2019")
+            .setStatus("placed")
+            .setComplete(true);
     }
 
 }

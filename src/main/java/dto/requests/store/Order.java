@@ -6,6 +6,7 @@ public class Order {
     private int quantity;
     private String shipDate;
     private String status;
+    private boolean complete;
 
     public int getId() {
         return id;
@@ -49,6 +50,15 @@ public class Order {
 
     public Order setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public Order setComplete(boolean complete) {
+        this.complete = complete;
         return this;
     }
 }
