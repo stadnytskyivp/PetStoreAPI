@@ -11,12 +11,12 @@ import java.io.IOException;
 
 public class StoreClient extends Client {
 
-    final private static String STORE_ORDER_ENDPOINT = "/store/order";
+    final private static String STORE_ORDER_ENDPOINT = "/v2/store/order";
     final private static String STORE_ORDER_BY_ID_ENDPOINT = STORE_ORDER_ENDPOINT + "/%s";
-    final private static String STORE_INVENTORY_ENDPOINT = "/store/inventory";
+    final private static String STORE_INVENTORY_ENDPOINT = "/v2/store/inventory";
 
     @Step("Adding order to the store")
-    public static Pet postOrder(Order orderToPost) throws IOException {
+    public static Order postOrder(Order orderToPost) throws IOException {
 
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -35,6 +35,6 @@ public class StoreClient extends Client {
             .body()
             .extract()
             .response()
-            .as(Pet.class);
+            .as(Order.class);
     }
 }

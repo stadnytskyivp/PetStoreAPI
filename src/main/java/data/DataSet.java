@@ -48,7 +48,7 @@ public class DataSet {
             .setId(1992)
             .setPetId(669118)
             .setQuantity(1)
-            .setShipDate("03.11.2019")
+            .setShipDate("2020-09-16T12:31:21.005+0000")
             .setStatus("placed")
             .setComplete(true);
     }
