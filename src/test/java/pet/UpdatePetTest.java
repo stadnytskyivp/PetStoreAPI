@@ -18,7 +18,7 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class UpdatePetTest extends AbstractTest {
+public class UpdatePetTest extends AbstractPetTest {
 
     @BeforeTest
     public void removeAddedPet() throws IOException {

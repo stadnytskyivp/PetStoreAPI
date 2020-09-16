@@ -12,7 +12,7 @@ import java.io.IOException;
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class AddPetPhotoTest extends AbstractTest {
+public class AddPetPhotoTest extends AbstractPetTest {
 
     @BeforeMethod
     public void addPet() throws IOException {

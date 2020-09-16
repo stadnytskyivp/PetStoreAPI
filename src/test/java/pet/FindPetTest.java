@@ -13,7 +13,7 @@ import java.io.IOException;
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class FindPetTest extends AbstractTest {
+public class FindPetTest extends AbstractPetTest {
 
     @BeforeMethod
     public void removeAddedPet() throws IOException {

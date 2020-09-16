@@ -12,7 +12,7 @@ import static client.PetClient.deletePetById;
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class DeleteNonExistingPetTest extends AbstractTest {
+public class DeleteNonExistingPetTest extends AbstractPetTest {
 
     @Description("Verify that we will get error trying delete defunct pet")
     @Test

@@ -17,7 +17,7 @@ import static client.PetClient.deletePetById;
 import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class AddPetTest extends AbstractTest {
+public class AddPetTest extends AbstractPetTest {
 
     @Description("Verify that we are adding pet to the store")
     @Parameters({"Pet for adding"})

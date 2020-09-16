@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-public class FindPetByStatusTest extends AbstractTest {
+public class FindPetByStatusTest extends AbstractPetTest {
 
     @Story("Searching pets by status")
     @Description("Verify that we are getting pets by the right status")

@@ -13,7 +13,7 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.DataSet.messageNotFoundResponse;
 
-public class FindPetNegativeTest extends AbstractTest {
+public class FindPetNegativeTest extends AbstractPetTest {
 
     @Description("Verify that we will get error message by getting defunct pet by id")
     @Test

@@ -13,7 +13,7 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.DataSet.messageDelResponse;
 
-public class DeletePetTest extends AbstractTest {
+public class DeletePetTest extends AbstractPetTest {
 
     @BeforeMethod
     public void removeAddedPet() throws IOException {
