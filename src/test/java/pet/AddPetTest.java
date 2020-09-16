@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static client.PetClient.deletePetById;
-import static data.PetInfo.addingPet;
+import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
 public class AddPetTest extends AbstractTest {

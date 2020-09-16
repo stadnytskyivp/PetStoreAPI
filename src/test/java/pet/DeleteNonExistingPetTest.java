@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static client.PetClient.deletePetById;
 import static client.PetClient.postPet;
-import static data.PetInfo.addingPet;
+import static data.DataSet.addingPet;
 
 public class DeleteNonExistingPetTest extends AbstractTest {
 

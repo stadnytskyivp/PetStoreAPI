@@ -1,7 +1,7 @@
 package pet;
 
 import client.PetClient;
-import dto.requests.pet.ResponseInfo;
+import dto.requests.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import static client.PetClient.deletePetById;
 import static client.PetClient.postPet;
-import static data.PetInfo.addingPet;
-import static data.PetInfo.messageNotFoundResponse;
+import static data.DataSet.addingPet;
+import static data.DataSet.messageNotFoundResponse;
 
 public class FindPetNegativeTest extends AbstractTest {
 

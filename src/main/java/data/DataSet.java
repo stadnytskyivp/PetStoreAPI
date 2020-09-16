@@ -2,13 +2,13 @@ package data;
 
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
-import dto.requests.pet.ResponseInfo;
+import dto.requests.ResponseInfo;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class PetInfo {
+public class DataSet {
 
     public static Pet addingPet() {
         PetCategory petCategory = new PetCategory().setId(666).setName("Imp");
