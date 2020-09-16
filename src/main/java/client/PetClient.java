@@ -12,34 +12,28 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
-import pet.AbstractTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class PetClient extends AbstractTest {
+public class PetClient {
+    final private static String BASE_URI = "https://petstore.swagger.io";
+    final private static String PET_ENDPOINT = "/v2/pet/";
+    final private static String PET_FIND_BY_STATUS_ENDPOINT = PET_ENDPOINT + "findByStatus?status=";
+    final private static String PET_IMAGE_UPLOAD_ENDPOINT = PET_ENDPOINT + "%s/uploadImage";    // setting here pet ID
 
-    final private static String PET_PARAMETER = "/v2/pet/";
-    final private static String PET_FIND_BY_STATUS_PARAMETER = "/v2/pet/findByStatus?status=";
-    final private static String PET_IMAGE_UPLOAD_PARAMETER = "/v2/pet/%s/uploadImage";
-
-    @Step("Getting base URL")
-    public static String getBaseUrl(String hostName) throws IOException {
-        Properties properties = new Properties();
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
-            "/src/main/resources/env.properties");
-        properties.load(fis);
-        return properties.getProperty(hostName);
-    }
+    public static final Logger LOGGER = LoggerFactory.getLogger(PetClient.class);
 
     @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
         LOGGER.debug("building request specification ");
 
         return new RequestSpecBuilder()
-            .setBaseUri(getBaseUrl("PET_STORE_HOST"))
+            .setBaseUri(BASE_URI)
             .setContentType(ContentType.JSON)
             .build();
     }
@@ -49,7 +43,7 @@ public class PetClient extends AbstractTest {
         LOGGER.debug("building request specification ");
 
         return new RequestSpecBuilder()
-            .setBaseUri(getBaseUrl("PET_STORE_HOST"))
+            .setBaseUri(BASE_URI)
             .build();
     }
 
@@ -82,7 +76,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .post(PET_PARAMETER)
+            .post(PET_ENDPOINT)
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
@@ -104,7 +98,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .get(PET_PARAMETER + petId)
+            .get(PET_ENDPOINT + petId)
             .then()
             .spec(buildRes())
             .log()
@@ -125,7 +119,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .get(PET_PARAMETER + petId)
+            .get(PET_ENDPOINT + petId)
             .then()
             .spec(buildRes())
             .log()
@@ -146,7 +140,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .delete(PET_PARAMETER + petId)
+            .delete(PET_ENDPOINT + petId)
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildUncheckedRes())
@@ -168,7 +162,7 @@ public class PetClient extends AbstractTest {
 
         return res
             .when()
-            .delete(PET_PARAMETER + petId)
+            .delete(PET_ENDPOINT + petId)
             .then()
             .statusCode(HttpStatus.SC_NOT_FOUND)
             .spec(buildUncheckedRes())
@@ -189,7 +183,7 @@ public class PetClient extends AbstractTest {
 
         return Arrays.asList(res
             .when()
-            .get(PET_FIND_BY_STATUS_PARAMETER + petStatus.getStatus())
+            .get(PET_FIND_BY_STATUS_ENDPOINT + petStatus.getStatus())
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())
@@ -201,20 +195,18 @@ public class PetClient extends AbstractTest {
     @Step("Adding pet photo to the pet")
     public static ResponseInfo postPetPicture(Long petId) throws IOException {
 
-        Formatter formatter = new Formatter();
-
         LOGGER.debug("sending request");
 
         RequestSpecification res = RestAssured.given()
             .spec(buildUncheckedReq())
-            .multiPart("file",new File(System.getProperty("user.dir") +
+            .multiPart("file", new File(System.getProperty("user.dir") +
                 "/img/imp.png"));
 
         LOGGER.debug("expecting response");
 
         return res
             .when()
-            .post(String.valueOf(formatter.format(PET_IMAGE_UPLOAD_PARAMETER, petId)))
+            .post(String.valueOf(new Formatter().format(PET_IMAGE_UPLOAD_ENDPOINT, petId)))
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildUncheckedRes())
@@ -224,5 +216,4 @@ public class PetClient extends AbstractTest {
             .response()
             .as(ResponseInfo.class);
     }
-
 }
