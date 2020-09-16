@@ -14,6 +14,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import pet.AbstractTest;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
@@ -22,6 +23,7 @@ public class PetClient extends AbstractTest {
 
     final private static String PET_PARAMETER = "/v2/pet/";
     final private static String PET_FIND_BY_STATUS_PARAMETER = "/v2/pet/findByStatus?status=";
+    final private static String PET_IMAGE_UPLOAD_PARAMETER = "/v2/pet/%s/uploadImage";
 
     @Step("Getting base URL")
     public static String getBaseUrl(String hostName) throws IOException {
@@ -39,6 +41,15 @@ public class PetClient extends AbstractTest {
         return new RequestSpecBuilder()
             .setBaseUri(getBaseUrl("PET_STORE_HOST"))
             .setContentType(ContentType.JSON)
+            .build();
+    }
+
+    @Step("Building request specification")
+    public static RequestSpecification buildUncheckedReq() throws IOException {
+        LOGGER.debug("building request specification ");
+
+        return new RequestSpecBuilder()
+            .setBaseUri(getBaseUrl("PET_STORE_HOST"))
             .build();
     }
 
@@ -185,6 +196,33 @@ public class PetClient extends AbstractTest {
             .extract()
             .response()
             .as(Pet[].class));
+    }
+
+    @Step("Adding pet photo to the pet")
+    public static ResponseInfo postPetPicture(Long petId) throws IOException {
+
+        Formatter formatter = new Formatter();
+
+        LOGGER.debug("sending request");
+
+        RequestSpecification res = RestAssured.given()
+            .spec(buildUncheckedReq())
+            .multiPart("file",new File(System.getProperty("user.dir") +
+                "/img/imp.png"));
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .post(String.valueOf(formatter.format(PET_IMAGE_UPLOAD_PARAMETER, petId)))
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
     }
 
 }

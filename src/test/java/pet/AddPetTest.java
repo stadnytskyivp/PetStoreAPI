@@ -37,8 +37,11 @@ public class AddPetTest extends AbstractTest {
 
         LOGGER.info("END TEST");
 
+        LOGGER.info("AFTER TEST DELETING PET");
+
         deletePetById(response.getId());
 
+        LOGGER.info("AFTER TEST PET DELETED");
     }
 
     @DataProvider
