@@ -1,6 +1,5 @@
 package client;
 
-import dto.requests.pet.Pet;
 import dto.requests.store.Order;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -8,6 +7,7 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.IOException;
+import java.util.Formatter;
 
 public class StoreClient extends Client {
 
@@ -28,6 +28,28 @@ public class StoreClient extends Client {
         return res
             .when()
             .post(STORE_ORDER_ENDPOINT)
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(Order.class);
+    }
+
+    @Step("Getting order by ID {0}")
+    public static Order getOrderById(long orderId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .get(String.valueOf(new Formatter().format(STORE_ORDER_BY_ID_ENDPOINT, orderId)))
             .then()
             .statusCode(HttpStatus.SC_OK)
             .spec(buildRes())

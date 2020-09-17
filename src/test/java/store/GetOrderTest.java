@@ -28,7 +28,7 @@ public class GetOrderTest extends AbstractStoreTest{
     public void getOrderTest() throws IOException {
         LOGGER.info("START TEST find order in the store");
 
-        Order response = StoreClient.getOrderById(DataSet.addingPet().getId());
+        Order response = StoreClient.getOrderById(DataSet.addingOrder().getId());
 
         Assert.assertEquals(response.getId(), addingOrder().getId());
         Assert.assertEquals(response.getPetId(), addingOrder().getPetId());
