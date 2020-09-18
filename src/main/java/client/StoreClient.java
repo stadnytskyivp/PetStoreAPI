@@ -4,6 +4,7 @@ import dto.requests.ResponseInfo;
 import dto.requests.store.Order;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
@@ -81,5 +82,26 @@ public class StoreClient extends Client {
             .extract()
             .response()
             .as(ResponseInfo.class);
+    }
+
+    @Step("Getting order by ID {0}")
+    public static Response getStoreInventory() throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .get(STORE_INVENTORY_ENDPOINT)
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response();
     }
 }
