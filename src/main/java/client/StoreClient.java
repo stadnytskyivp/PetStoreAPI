@@ -1,5 +1,6 @@
 package client;
 
+import dto.requests.ResponseInfo;
 import dto.requests.store.Order;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -58,5 +59,27 @@ public class StoreClient extends Client {
             .extract()
             .response()
             .as(Order.class);
+    }
+
+    @Step("Deleting order by ID {0}")
+    public static ResponseInfo deleteOrderById(long orderId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .delete(String.valueOf(new Formatter().format(STORE_ORDER_BY_ID_ENDPOINT, orderId)))
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
     }
 }

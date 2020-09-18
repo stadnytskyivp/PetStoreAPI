@@ -20,7 +20,7 @@ public class GetOrderTest extends AbstractStoreTest{
 
         StoreClient.postOrder(addingOrder());
 
-        LOGGER.info("BEFORE TEST order is added");
+        LOGGER.info("BEFORE TEST order added");
     }
 
     @Description("Verify that we are getting order by id")

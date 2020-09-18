@@ -21,7 +21,7 @@ public class DeletePetTest extends AbstractPetTest {
 
         postPet(addingPet());
 
-        LOGGER.info("BEFORE TEST pet is added");
+        LOGGER.info("BEFORE TEST pet added");
     }
 
     @Description("Verify that we are deleting pet")

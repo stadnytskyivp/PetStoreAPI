@@ -26,7 +26,7 @@ public class UpdatePetTest extends AbstractPetTest {
 
         postPet(addingPet());
 
-        LOGGER.info("BEFORE TEST pet is added");
+        LOGGER.info("BEFORE TEST pet added");
     }
 
     @Description("Verify that we are updating pet info")
