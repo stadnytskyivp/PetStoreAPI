@@ -1,10 +1,11 @@
-package pet;
+package petStoreTests.pet;
 
 import client.PetClient;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 
@@ -12,14 +13,14 @@ import static client.PetClient.deletePetById;
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class DeleteNonExistingPetTest extends AbstractPetTest {
+public class DeleteNonExistingTest extends AbstractTest {
 
-    @Description("Verify that we will get error trying delete defunct pet")
+    @Description("Verify that we will get error trying delete defunct petStoreTests.pet")
     @Test
     public void deleteDefunctPetTest() throws IOException {
-        LOGGER.info("START TEST try to delete defunct pet");
+        LOGGER.info("START TEST try to delete defunct petStoreTests.pet");
 
-        LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
+        LOGGER.info("precondition adding and deleting petStoreTests.pet to insure that there won't be any petStoreTests.pet with our petID");
         postPet(addingPet());
         deletePetById(addingPet().getId());
 

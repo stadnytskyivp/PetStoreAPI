@@ -46,7 +46,7 @@ public class DataSet {
 
         return new Order()
             .setId(1992)
-            .setPetId(669118)
+            .setPetId(669118L)
             .setQuantity(1)
             .setShipDate("2020-09-16T12:31:21.005+0000")
             .setStatus("placed")

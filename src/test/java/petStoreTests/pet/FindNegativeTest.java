@@ -1,10 +1,11 @@
-package pet;
+package petStoreTests.pet;
 
 import client.PetClient;
 import dto.requests.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 
@@ -13,14 +14,14 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.DataSet.messageNotFoundResponse;
 
-public class FindPetNegativeTest extends AbstractPetTest {
+public class FindNegativeTest extends AbstractTest {
 
-    @Description("Verify that we will get error message by getting defunct pet by id")
+    @Description("Verify that we will get error message by getting defunct petStoreTests.pet by id")
     @Test
     public void getDefunctPetTest() throws IOException {
-        LOGGER.info("START TEST find pet in the store");
+        LOGGER.info("START TEST find petStoreTests.pet in the petStoreTests.store");
 
-        LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
+        LOGGER.info("precondition adding and deleting petStoreTests.pet to insure that there won't be any petStoreTests.pet with our petID");
         postPet(addingPet());
         deletePetById(addingPet().getId());
 

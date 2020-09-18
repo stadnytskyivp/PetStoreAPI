@@ -1,36 +1,36 @@
 package dto.requests.store;
 
 public class Order {
-    private int id;
-    private int petId;
-    private int quantity;
+    private long id;
+    private Long petId;
+    private Integer quantity;
     private String shipDate;
     private String status;
-    private boolean complete;
+    private Boolean complete;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public Order setId(int id) {
+    public Order setId(long id) {
         this.id = id;
         return this;
     }
 
-    public int getPetId() {
+    public Long getPetId() {
         return petId;
     }
 
-    public Order setPetId(int petId) {
+    public Order setPetId(Long petId) {
         this.petId = petId;
         return this;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public Order setQuantity(int quantity) {
+    public Order setQuantity(Integer quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -53,11 +53,11 @@ public class Order {
         return this;
     }
 
-    public boolean isComplete() {
+    public Boolean isComplete() {
         return complete;
     }
 
-    public Order setComplete(boolean complete) {
+    public Order setComplete(Boolean complete) {
         this.complete = complete;
         return this;
     }

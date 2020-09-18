@@ -1,4 +1,4 @@
-package pet;
+package petStoreTests.pet;
 
 import client.PetClient;
 import dto.requests.pet.Pet;
@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,22 +19,22 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class UpdatePetTest extends AbstractPetTest {
+public class UpdateTest extends AbstractTest {
 
     @BeforeTest
     public void removeAddedPet() throws IOException {
-        LOGGER.info("BEFORE TEST adding a pet");
+        LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
 
         postPet(addingPet());
 
-        LOGGER.info("BEFORE TEST pet added");
+        LOGGER.info("BEFORE TEST petStoreTests.pet added");
     }
 
-    @Description("Verify that we are updating pet info")
+    @Description("Verify that we are updating petStoreTests.pet info")
     @Parameters({"Pet for updating"})
     @Test(dataProvider = "positiveTests")
     public static void updatePetTest(Pet simplePet) throws IOException {
-        LOGGER.info("START TEST add pet to the store ");
+        LOGGER.info("START TEST add petStoreTests.pet to the petStoreTests.store ");
 
         Pet response = PetClient.postPet(simplePet);
 

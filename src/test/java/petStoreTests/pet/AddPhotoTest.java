@@ -1,4 +1,4 @@
-package pet;
+package petStoreTests.pet;
 
 import client.PetClient;
 import dto.requests.ResponseInfo;
@@ -6,27 +6,28 @@ import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class AddPetPhotoTest extends AbstractPetTest {
+public class AddPhotoTest extends AbstractTest {
 
     @BeforeMethod
     public void addPet() throws IOException {
-        LOGGER.info("BEFORE TEST adding a pet");
+        LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
 
         postPet(addingPet());
 
-        LOGGER.info("BEFORE TEST pet added");
+        LOGGER.info("BEFORE TEST petStoreTests.pet added");
     }
 
-    @Description("Verify that we can add a pet photo to the existing pet")
+    @Description("Verify that we can add a petStoreTests.pet photo to the existing petStoreTests.pet")
     @Test
     public void addPetPhotoTest() throws IOException {
-        LOGGER.info("START TEST add pet photo to the existing pet ");
+        LOGGER.info("START TEST add petStoreTests.pet photo to the existing petStoreTests.pet ");
 
         ResponseInfo response = PetClient.postPetPicture(addingPet().getId());
 

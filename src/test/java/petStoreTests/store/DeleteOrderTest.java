@@ -1,32 +1,29 @@
-package store;
+package petStoreTests.store;
 
-import client.PetClient;
 import client.StoreClient;
 import dto.requests.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 
 import static data.DataSet.*;
 
-public class DeleteOrderTest extends AbstractStoreTest{
+public class DeleteOrderTest extends AbstractTest {
 
-    @BeforeMethod
-    public void addOrder() throws IOException {
+    @Description("Verify that we are deleting order")
+    @Test
+    public static void deleteOrderTest() throws IOException {
+
         LOGGER.info("BEFORE TEST adding a order");
 
         StoreClient.postOrder(addingOrder());
 
         LOGGER.info("BEFORE TEST order added");
-    }
 
-    @Description("Verify that we are deleting order")
-    @Test
-    public static void deleteOrderTest() throws IOException {
-        LOGGER.info("START TEST delete order from the store");
+        LOGGER.info("START TEST delete order from the petStoreTests.store");
 
         ResponseInfo response = StoreClient.deleteOrderById(addingOrder().getId());
 
