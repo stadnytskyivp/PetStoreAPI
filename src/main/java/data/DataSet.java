@@ -27,7 +27,6 @@ public class DataSet {
     }
 
     public static ResponseInfo messageDelResponse() {
-
         return new ResponseInfo()
             .setCode(200)
             .setType("unknown")
@@ -35,7 +34,6 @@ public class DataSet {
     }
 
     public static ResponseInfo messageNotFoundResponse() {
-
         return new ResponseInfo()
             .setCode(1)
             .setType("error")
@@ -43,7 +41,6 @@ public class DataSet {
     }
 
     public static Order addingOrder() {
-
         return new Order()
             .setId(1992)
             .setPetId(669118L)

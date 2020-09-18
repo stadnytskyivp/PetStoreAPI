@@ -19,7 +19,6 @@ public class Client {
     @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
         LOGGER.debug("building request specification ");
-
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)
             .setContentType(ContentType.JSON)
@@ -29,7 +28,6 @@ public class Client {
     @Step("Building request specification")
     public static RequestSpecification buildUncheckedReq() throws IOException {
         LOGGER.debug("building request specification ");
-
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)
             .build();
@@ -38,7 +36,6 @@ public class Client {
     @Step("Building response specification")
     public static ResponseSpecification buildRes() {
         LOGGER.debug("building response specification ");
-
         return new ResponseSpecBuilder()
             .expectContentType(ContentType.JSON)
             .build();
@@ -47,7 +44,6 @@ public class Client {
     @Step("Building response specification without any response checking")
     public static ResponseSpecification buildUncheckedRes() {
         LOGGER.debug("building response specification ");
-
         return new ResponseSpecBuilder()
             .build();
     }

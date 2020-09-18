@@ -22,14 +22,12 @@ public class FindByStatusTest extends AbstractTest {
     @Test(dataProvider = "statusData")
     public void getPetsByStatusTest(EStatus status) throws IOException {
         LOGGER.info("START TEST find pets in the petStoreTests.store by status");
-
         List<Pet> pets = PetClient.getPetByStatus(status);
 
         for (Pet pet : pets) {
                 String str = pet.getStatus();
                 Assert.assertEquals(str, status.getStatus());
         }
-
         LOGGER.info("END TEST");
     }
 

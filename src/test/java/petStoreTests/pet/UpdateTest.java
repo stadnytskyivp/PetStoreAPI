@@ -20,17 +20,15 @@ import static data.ReusableMethods.getBigData;
 
 public class UpdateTest extends AbstractTest {
 
-    @Description("Verify that we are updating petStoreTests.pet info")
+    @Description("Verify that we are updating pet info")
     @Parameters({"Pet for updating"})
     @Test(dataProvider = "positiveTests")
     public static void updatePetTest(Pet simplePet) throws IOException {
-        LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
-
+        LOGGER.info("BEFORE TEST adding a pet");
         postPet(addingPet());
+        LOGGER.info("BEFORE TEST pet added");
 
-        LOGGER.info("BEFORE TEST petStoreTests.pet added");
-        LOGGER.info("START TEST add petStoreTests.pet to the petStoreTests.store ");
-
+        LOGGER.info("START TEST add pet to the store ");
         Pet response = PetClient.postPet(simplePet);
 
         Assert.assertEquals(response.getName(), simplePet.getName());
@@ -38,7 +36,6 @@ public class UpdateTest extends AbstractTest {
         Assert.assertEquals(response.getCategory(), simplePet.getCategory());
         Assert.assertEquals(response.getPhotoUrls().toString(), simplePet.getPhotoUrls().toString());
         Assert.assertEquals(response.getTags(), simplePet.getTags());
-
         LOGGER.info("END TEST");
     }
 

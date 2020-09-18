@@ -17,12 +17,11 @@ import static data.DataSet.addingOrder;
 
 public class AddOrderTest extends AbstractTest {
 
-    @Description("Verify that we are adding order to the petStoreTests.store")
+    @Description("Verify that we are adding order to the store")
     @Parameters({"Order for adding"})
     @Test(dataProvider = "testData")
     public void addOrderTest(Order order) throws IOException {
-        LOGGER.info("START TEST add order to the petStoreTests.store ");
-
+        LOGGER.info("START TEST add order to the store ");
         Order response = StoreClient.postOrder(order);
 
         Assert.assertNotNull(response.getId());
@@ -34,13 +33,10 @@ public class AddOrderTest extends AbstractTest {
         Assert.assertTrue(response.getQuantity()>=0);
         Assert.assertEquals(response.getShipDate(), order.getShipDate());
         Assert.assertEquals(response.getStatus(), order.getStatus());
-
         LOGGER.info("END TEST");
 
         LOGGER.info("AFTER TEST DELETING ORDER");
-
         deleteOrderById(response.getId());
-
         LOGGER.info("AFTER TEST ORDER DELETED");
     }
 

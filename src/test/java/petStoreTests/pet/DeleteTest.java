@@ -19,18 +19,15 @@ public class DeleteTest extends AbstractTest {
     @Test
     public static void deletePetTest() throws IOException {
         LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
-
         postPet(addingPet());
-
         LOGGER.info("BEFORE TEST petStoreTests.pet added");
-        LOGGER.info("START TEST delete petStoreTests.pet from the petStoreTests.store");
 
+        LOGGER.info("START TEST delete petStoreTests.pet from the petStoreTests.store");
         ResponseInfo response = PetClient.deletePetById(addingPet().getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(response.getType(), messageDelResponse().getType());
         Assert.assertEquals(response.getMessage(), messageDelResponse().getMessage());
-
         LOGGER.info("END TEST");
     }
 

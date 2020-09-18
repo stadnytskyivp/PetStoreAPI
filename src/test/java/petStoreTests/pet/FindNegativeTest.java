@@ -16,21 +16,19 @@ import static data.DataSet.messageNotFoundResponse;
 
 public class FindNegativeTest extends AbstractTest {
 
-    @Description("Verify that we will get error message by getting defunct petStoreTests.pet by id")
+    @Description("Verify that we will get error message by getting defunct pet by id")
     @Test
     public void getDefunctPetTest() throws IOException {
-        LOGGER.info("START TEST find petStoreTests.pet in the petStoreTests.store");
-
-        LOGGER.info("precondition adding and deleting petStoreTests.pet to insure that there won't be any petStoreTests.pet with our petID");
+        LOGGER.info("precondition adding and deleting pet to insure that there won't be any pet with our petID");
         postPet(addingPet());
         deletePetById(addingPet().getId());
 
+        LOGGER.info("START TEST find pet in the store");
         ResponseInfo res = PetClient.getNonExistingPetById(addingPet().getId());
 
         Assert.assertEquals(res.getCode(), messageNotFoundResponse().getCode());
         Assert.assertEquals(res.getType(), messageNotFoundResponse().getType());
         Assert.assertEquals(res.getMessage(), messageNotFoundResponse().getMessage());
-
         LOGGER.info("END TEST");
     }
 

@@ -14,16 +14,15 @@ import static data.DataSet.addingPet;
 
 public class AddPhotoTest extends AbstractTest {
 
-    @Description("Verify that we can add a petStoreTests.pet photo to the existing petStoreTests.pet")
+    @Description("Verify that we can add a pet photo to the existing pet")
     @Test
     public void addPetPhotoTest() throws IOException {
-
-        LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
+        LOGGER.info("BEFORE TEST adding a pet");
 
         postPet(addingPet());
 
-        LOGGER.info("BEFORE TEST petStoreTests.pet added");
-        LOGGER.info("START TEST add petStoreTests.pet photo to the existing petStoreTests.pet ");
+        LOGGER.info("BEFORE TEST pet added");
+        LOGGER.info("START TEST add pet photo to the existing pet ");
 
         ResponseInfo response = PetClient.postPetPicture(addingPet().getId());
 

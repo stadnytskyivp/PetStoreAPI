@@ -37,7 +37,6 @@ public class AddTest extends AbstractTest {
         Assert.assertEquals(response.getTags(), simplePet.getTags());
 
         LOGGER.info("END TEST");
-
         LOGGER.info("AFTER TEST DELETING PET");
 
         deletePetById(response.getId());

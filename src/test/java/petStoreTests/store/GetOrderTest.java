@@ -19,13 +19,10 @@ public class GetOrderTest extends AbstractTest {
     public void getOrderTest() throws IOException {
 
         LOGGER.info("BEFORE TEST adding a order");
-
         StoreClient.postOrder(addingOrder());
-
         LOGGER.info("BEFORE TEST order added");
 
-        LOGGER.info("START TEST find order in the petStoreTests.store");
-
+        LOGGER.info("START TEST find order in the store");
         Order response = StoreClient.getOrderById(DataSet.addingOrder().getId());
 
         Assert.assertEquals(response.getId(), addingOrder().getId());
@@ -34,7 +31,6 @@ public class GetOrderTest extends AbstractTest {
         Assert.assertEquals(response.getShipDate(), addingOrder().getShipDate());
         Assert.assertEquals(response.getStatus(), addingOrder().getStatus());
         Assert.assertEquals(response.isComplete(), addingOrder().isComplete());
-
         LOGGER.info("END TEST");
     }
 }
