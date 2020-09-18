@@ -5,7 +5,6 @@ import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -21,19 +20,15 @@ import static data.ReusableMethods.getBigData;
 
 public class UpdateTest extends AbstractTest {
 
-    @BeforeTest
-    public void removeAddedPet() throws IOException {
+    @Description("Verify that we are updating petStoreTests.pet info")
+    @Parameters({"Pet for updating"})
+    @Test(dataProvider = "positiveTests")
+    public static void updatePetTest(Pet simplePet) throws IOException {
         LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
 
         postPet(addingPet());
 
         LOGGER.info("BEFORE TEST petStoreTests.pet added");
-    }
-
-    @Description("Verify that we are updating petStoreTests.pet info")
-    @Parameters({"Pet for updating"})
-    @Test(dataProvider = "positiveTests")
-    public static void updatePetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add petStoreTests.pet to the petStoreTests.store ");
 
         Pet response = PetClient.postPet(simplePet);

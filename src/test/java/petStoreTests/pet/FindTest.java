@@ -5,7 +5,6 @@ import data.DataSet;
 import dto.requests.pet.Pet;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import petStoreTests.AbstractTest;
 
@@ -16,18 +15,14 @@ import static data.DataSet.addingPet;
 
 public class FindTest extends AbstractTest {
 
-    @BeforeMethod
-    public void removeAddedPet() throws IOException {
+    @Description("Verify that we are getting pets by id")
+    @Test
+    public void getPetTest() throws IOException {
         LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
 
         postPet(addingPet());
 
         LOGGER.info("BEFORE TEST petStoreTests.pet added");
-    }
-
-    @Description("Verify that we are getting pets by id")
-    @Test
-    public void getPetTest() throws IOException {
         LOGGER.info("START TEST find petStoreTests.pet in the petStoreTests.store");
 
         Pet pet = PetClient.getPetById(DataSet.addingPet().getId());

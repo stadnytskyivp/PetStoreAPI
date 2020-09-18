@@ -4,7 +4,6 @@ import client.PetClient;
 import dto.requests.ResponseInfo;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import petStoreTests.AbstractTest;
 
@@ -16,18 +15,14 @@ import static data.DataSet.messageDelResponse;
 
 public class DeleteTest extends AbstractTest {
 
-    @BeforeMethod
-    public void removeAddedPet() throws IOException {
+    @Description("Verify that we are deleting petStoreTests.pet")
+    @Test
+    public static void deletePetTest() throws IOException {
         LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
 
         postPet(addingPet());
 
         LOGGER.info("BEFORE TEST petStoreTests.pet added");
-    }
-
-    @Description("Verify that we are deleting petStoreTests.pet")
-    @Test
-    public static void deletePetTest() throws IOException {
         LOGGER.info("START TEST delete petStoreTests.pet from the petStoreTests.store");
 
         ResponseInfo response = PetClient.deletePetById(addingPet().getId());

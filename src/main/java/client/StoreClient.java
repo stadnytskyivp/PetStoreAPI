@@ -126,4 +126,26 @@ public class StoreClient extends Client {
             .response()
             .as(ResponseInfo.class);
     }
+
+    @Step("Deleting order by ID {0}")
+    public static ResponseInfo deleteNonExistingOrderById(long orderId) throws IOException {
+
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+
+        return res
+            .when()
+            .delete(String.valueOf(new Formatter().format(STORE_ORDER_BY_ID_ENDPOINT, orderId)))
+            .then()
+            .statusCode(HttpStatus.SC_NOT_FOUND)
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
+    }
 }

@@ -4,7 +4,7 @@
     <test verbose="9" name="All tests">
         <classes>
             <class name="petStoreTests.pet.AddTest"/>
-            <class name="petStoreTests.pet.DeleteNonExistingTest"/>
+            <class name="petStoreTests.pet.DeleteNonExistingPetTest"/>
             <class name="petStoreTests.pet.DeleteTest"/>
             <class name="petStoreTests.pet.FindByStatusTest"/>
             <class name="petStoreTests.pet.FindNegativeTest"/>
