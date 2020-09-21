@@ -64,5 +64,4 @@ public class AddTest extends AbstractTest {
             {addingPet().setPhotoUrls(Collections.emptyList()).setName(getBigData())},
         };
     }
-
 }

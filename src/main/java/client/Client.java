@@ -18,7 +18,7 @@ public class Client {
 
     @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
-        LOGGER.debug("building request specification ");
+        LOGGER.debug("building request specification ")пше фвв
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)
             .setContentType(ContentType.JSON)
