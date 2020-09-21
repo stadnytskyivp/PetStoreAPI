@@ -10,7 +10,7 @@ import org.apache.http.HttpStatus;
 import java.io.IOException;
 import java.util.Formatter;
 
-public class StoreClient extends Client {
+public class StoreClient extends BaseClient {
 
     final private static String STORE_ORDER_ENDPOINT = "/v2/store/order";
     final private static String STORE_ORDER_BY_ID_ENDPOINT = STORE_ORDER_ENDPOINT + "/%s";

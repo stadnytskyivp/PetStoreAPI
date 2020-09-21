@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class PetClient extends Client {
+public class PetClient extends BaseClient {
     final private static String PET_ENDPOINT = "/v2/pet/";
     final private static String PET_FIND_BY_STATUS_ENDPOINT = PET_ENDPOINT + "findByStatus?status=";
     final private static String PET_IMAGE_UPLOAD_ENDPOINT = PET_ENDPOINT + "%s/uploadImage";    // setting here pet ID
