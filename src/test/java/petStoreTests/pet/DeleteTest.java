@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
-import static data.DataSet.messageDelResponse;
+import static data.DataSet.messageUnknownResponse;
 
 public class DeleteTest extends AbstractTest {
 
@@ -26,8 +26,8 @@ public class DeleteTest extends AbstractTest {
         ResponseInfo response = PetClient.deletePetById(addingPet().getId());
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getType(), messageDelResponse().getType());
-        Assert.assertEquals(response.getMessage(), messageDelResponse().getMessage());
+        Assert.assertEquals(response.getType(), messageUnknownResponse().getType());
+        Assert.assertEquals(response.getMessage(), messageUnknownResponse().getMessage());
         LOGGER.info("END TEST");
     }
 

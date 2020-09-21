@@ -24,9 +24,9 @@ public class DeleteNonExistingOrderTest extends AbstractTest {
         LOGGER.info("START TEST try to delete nonexistent order in the store");
         ResponseInfo response = StoreClient.deleteNonExistingOrderById(addingOrder().getId());
 
-        Assert.assertEquals(response.getCode(), messageDelResponse().setCode(404).getCode());
-        Assert.assertEquals(response.getType(), messageDelResponse().getType());
-        Assert.assertEquals(response.getMessage(), messageDelResponse().setMessage("Order Not Found").getMessage());
+        Assert.assertEquals(response.getCode(), messageUnknownResponse().setCode(404).getCode());
+        Assert.assertEquals(response.getType(), messageUnknownResponse().getType());
+        Assert.assertEquals(response.getMessage(), messageUnknownResponse().setMessage("Order Not Found").getMessage());
         LOGGER.info("END TEST");
     }
 }

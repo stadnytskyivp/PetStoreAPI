@@ -27,7 +27,7 @@ public class DataSet {
             .setStatus("available");
     }
 
-    public static ResponseInfo messageDelResponse() {
+    public static ResponseInfo messageUnknownResponse() {
         return new ResponseInfo()
             .setCode(200)
             .setType("unknown")
