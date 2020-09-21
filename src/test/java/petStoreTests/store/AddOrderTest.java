@@ -28,9 +28,9 @@ public class AddOrderTest extends AbstractTest {
         Assert.assertNotNull(response.getPetId());
         Assert.assertNotNull(response.getQuantity());
         Assert.assertNotNull(response.isComplete());
-        Assert.assertTrue(response.getId()>=0);
-        Assert.assertTrue(response.getPetId()>=0);
-        Assert.assertTrue(response.getQuantity()>=0);
+        Assert.assertTrue(response.getId() >= 0);
+        Assert.assertTrue(response.getPetId() >= 0);
+        Assert.assertTrue(response.getQuantity() >= 0);
         Assert.assertEquals(response.getShipDate(), order.getShipDate());
         Assert.assertEquals(response.getStatus(), order.getStatus());
         LOGGER.info("END TEST");
