@@ -4,6 +4,7 @@ import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import dto.requests.ResponseInfo;
 import dto.requests.store.Order;
+import dto.requests.user.User;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,4 +51,15 @@ public class DataSet {
             .setComplete(true);
     }
 
+    public static User addingUser() {
+        return new User()
+            .setId(311)
+            .setUsername("Potato")
+            .setFirstName("Carl")
+            .setLastName("Jonson")
+            .setEmail("CJ@gmail.com")
+            .setPassword("123456")
+            .setPhone("+380931488666")
+            .setUserStatus(1);
+    }
 }
