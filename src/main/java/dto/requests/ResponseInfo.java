@@ -1,4 +1,4 @@
-package dto.requests.pet;
+package dto.requests;
 
 public class ResponseInfo {
 

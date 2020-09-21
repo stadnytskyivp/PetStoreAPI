@@ -2,13 +2,14 @@ package data;
 
 import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
-import dto.requests.pet.ResponseInfo;
+import dto.requests.ResponseInfo;
+import dto.requests.store.Order;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class PetInfo {
+public class DataSet {
 
     public static Pet addingPet() {
         PetCategory petCategory = new PetCategory().setId(666).setName("Imp");
@@ -26,7 +27,6 @@ public class PetInfo {
     }
 
     public static ResponseInfo messageDelResponse() {
-
         return new ResponseInfo()
             .setCode(200)
             .setType("unknown")
@@ -34,11 +34,20 @@ public class PetInfo {
     }
 
     public static ResponseInfo messageNotFoundResponse() {
-
         return new ResponseInfo()
             .setCode(1)
             .setType("error")
             .setMessage("Pet not found");
+    }
+
+    public static Order addingOrder() {
+        return new Order()
+            .setId(1992)
+            .setPetId(669118L)
+            .setQuantity(1)
+            .setShipDate("2020-09-16T12:31:21.005+0000")
+            .setStatus("placed")
+            .setComplete(true);
     }
 
 }

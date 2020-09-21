@@ -1,4 +1,4 @@
-package pet;
+package petStoreTests.pet;
 
 import client.PetClient;
 import dto.requests.pet.Pet;
@@ -8,22 +8,23 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import static client.PetClient.deletePetById;
-import static data.PetInfo.addingPet;
+import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class AddPetTest extends AbstractTest {
+public class AddTest extends AbstractTest {
 
-    @Description("Verify that we are adding pet to the store")
+    @Description("Verify that we are adding petStoreTests.pet to the petStoreTests.store")
     @Parameters({"Pet for adding"})
     @Test(dataProvider = "positiveTests")
     public void addPetTest(Pet simplePet) throws IOException {
-        LOGGER.info("START TEST add pet to the store ");
+        LOGGER.info("START TEST add petStoreTests.pet to the petStoreTests.store ");
 
         Pet response = PetClient.postPet(simplePet);
 
@@ -36,7 +37,6 @@ public class AddPetTest extends AbstractTest {
         Assert.assertEquals(response.getTags(), simplePet.getTags());
 
         LOGGER.info("END TEST");
-
         LOGGER.info("AFTER TEST DELETING PET");
 
         deletePetById(response.getId());
@@ -64,5 +64,4 @@ public class AddPetTest extends AbstractTest {
             {addingPet().setPhotoUrls(Collections.emptyList()).setName(getBigData())},
         };
     }
-
 }

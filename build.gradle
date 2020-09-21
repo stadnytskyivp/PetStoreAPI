@@ -25,7 +25,7 @@ dependencies {
 
 test {
     useTestNG(){
-        suites 'testng.xml'
+//        suites 'testng.xml'
 
 //        useDefaultListeners = true
 //        outputDirectory = file("$projectDir/LearnAutomationReport")
