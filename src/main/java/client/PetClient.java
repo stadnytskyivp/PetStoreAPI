@@ -156,4 +156,25 @@ public class PetClient extends BaseClient {
             .response()
             .as(ResponseInfo.class);
     }
+
+    @Step("Updating pet to the store")
+    public static Pet putPet(Pet petToPut) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+                .spec(buildReq())
+                .body(petToPut);
+
+        LOGGER.debug("expecting response");
+        return res
+                .when()
+                .put(PET_ENDPOINT)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .spec(buildRes())
+                .log()
+                .body()
+                .extract()
+                .response()
+                .as(Pet.class);
+    }
 }

@@ -8,7 +8,7 @@ public class ReusableMethods {
 
     public static String getBigData() throws IOException {
         Properties properties = new Properties();
-        FileInputStream fis = new FileInputStream(System.getProperty("petStoreTests.user.dir") +
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
             "/src/main/resources/log4j.properties");
         properties.load(fis);
         return properties.toString();
