@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class Client {
+public class BaseClient {
 
     final private static String BASE_URI = "https://petstore.swagger.io";
     protected static final Logger LOGGER = LoggerFactory.getLogger(PetClient.class);
 
     @Step("Building request specification")
     public static RequestSpecification buildReq() throws IOException {
-        LOGGER.debug("building request specification ")пше фвв
+        LOGGER.debug("building request specification ");
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)
             .setContentType(ContentType.JSON)

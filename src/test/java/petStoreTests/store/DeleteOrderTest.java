@@ -24,7 +24,7 @@ public class DeleteOrderTest extends AbstractTest {
         ResponseInfo response = StoreClient.deleteOrderById(addingOrder().getId());
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getType(), messageDelResponse().getType());
+        Assert.assertEquals(response.getType(), messageUnknownResponse().getType());
         Assert.assertEquals(response.getMessage(), String.valueOf(addingOrder().getId()));
         LOGGER.info("END TEST");
     }
