@@ -14,8 +14,6 @@ import petStoreTests.AbstractTest;
 
 import java.io.IOException;
 
-import static data.DataSet.*;
-
 public class AddUserTest extends AbstractTest {
 
     @Description("Verify that we are adding user to the store data base")
@@ -27,11 +25,11 @@ public class AddUserTest extends AbstractTest {
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());
-        Assert.assertEquals(response.getMessage(), String.valueOf(addingUser().getId()));
+        Assert.assertEquals(response.getMessage(), String.valueOf(user.getId()));
         LOGGER.info("END TEST");
 
         LOGGER.info("AFTER TEST DELETING USER");
-//        deleteOrderById(response.getId());
+        UserClient.deleteUserByUsername(user.getUsername());
         LOGGER.info("AFTER TEST USER DELETED");
     }
 

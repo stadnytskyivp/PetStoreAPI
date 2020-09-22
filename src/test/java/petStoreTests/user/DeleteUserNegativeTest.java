@@ -4,7 +4,6 @@ import client.UserClient;
 import data.DataSet;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import petStoreTests.AbstractTest;

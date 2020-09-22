@@ -1,8 +1,6 @@
 package client;
 
-import data.DataSet;
 import dto.requests.ResponseInfo;
-import dto.requests.store.Order;
 import dto.requests.user.User;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -11,7 +9,6 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.IOException;
-import java.util.Formatter;
 
 public class UserClient extends BaseClient {
     final private static String USER_ENDPOINT = "/v2/user/";
@@ -94,5 +91,26 @@ public class UserClient extends BaseClient {
                 .body()
                 .extract()
                 .response();
+    }
+
+    @Step("Adding user to the store data base")
+    public static ResponseInfo updateUser(User userToPut) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+                .spec(buildReq())
+                .body(userToPut);
+
+        LOGGER.debug("expecting response");
+        return res
+                .when()
+                .put(USER_ENDPOINT + userToPut.getUsername())
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .spec(buildRes())
+                .log()
+                .body()
+                .extract()
+                .response()
+                .as(ResponseInfo.class);
     }
 }

@@ -18,7 +18,7 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
-public class UpdateTest extends AbstractTest {
+public class UpdatePetTest extends AbstractTest {
 
     @Description("Verify that we are updating pet info")
     @Parameters({"Pet for updating"})
