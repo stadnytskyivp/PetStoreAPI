@@ -14,7 +14,7 @@ public class FindUserByUsernameTest extends AbstractTest {
 
     @Description("Verify that we are can find user in the store data base")
     @Test
-    public void findUserTes() throws IOException {
+    public void findUserTest() throws IOException {
 
         LOGGER.info("BEFORE TEST ADD USER");
         UserClient.postUser(DataSet.addingUser());

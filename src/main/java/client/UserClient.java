@@ -6,6 +6,7 @@ import dto.requests.store.Order;
 import dto.requests.user.User;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
@@ -54,5 +55,44 @@ public class UserClient extends BaseClient {
             .extract()
             .response()
             .as(User.class);
+    }
+
+    @Step("Deleting USER by username {0}")
+    public static ResponseInfo deleteUserByUsername(String username) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+                .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+        return res
+                .when()
+                .delete(USER_ENDPOINT + username)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .spec(buildUncheckedRes())
+                .log()
+                .body()
+                .extract()
+                .response()
+                .as(ResponseInfo.class);
+    }
+
+    @Step("Deleting USER by username {0}")
+    public static Response deleteNonExistingUser(String username) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+                .spec(buildReq());
+
+        LOGGER.debug("expecting response");
+        return res
+                .when()
+                .delete(USER_ENDPOINT + username)
+                .then()
+                .statusCode(HttpStatus.SC_NOT_FOUND)
+                .spec(buildUncheckedRes())
+                .log()
+                .body()
+                .extract()
+                .response();
     }
 }
