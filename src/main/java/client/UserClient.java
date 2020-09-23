@@ -9,9 +9,11 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.IOException;
+import java.util.List;
 
 public class UserClient extends BaseClient {
     final private static String USER_ENDPOINT = "/v2/user/";
+    final private static String USER_LIST_ENDPOINT = USER_ENDPOINT + "createWithList";
 
     @Step("Adding user to the store data base")
     public static ResponseInfo postUser(User userToPost) throws IOException {
@@ -104,6 +106,27 @@ public class UserClient extends BaseClient {
         return res
                 .when()
                 .put(USER_ENDPOINT + userToPut.getUsername())
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .spec(buildRes())
+                .log()
+                .body()
+                .extract()
+                .response()
+                .as(ResponseInfo.class);
+    }
+
+    @Step("Adding users to the store data base")
+    public static ResponseInfo postUserList(List<User> usersToPost) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+                .spec(buildReq())
+                .body(usersToPost);
+
+        LOGGER.debug("expecting response");
+        return res
+                .when()
+                .post(USER_LIST_ENDPOINT)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .spec(buildRes())
