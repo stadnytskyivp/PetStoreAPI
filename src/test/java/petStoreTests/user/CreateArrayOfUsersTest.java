@@ -13,18 +13,16 @@ import org.testng.annotations.Test;
 import petStoreTests.AbstractTest;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
-public class CreateListOfUsersTest extends AbstractTest {
+public class CreateArrayOfUsersTest extends AbstractTest {
 
-    @Description("Verify that we are adding list of users to the store data base")
+    @Description("Verify that we are adding array of users to the store data base")
     @Parameters({"Users for adding"})
     @Test(dataProvider = "testData")
-    public void addUserTest(List<User> users) throws IOException {
+    public void addUserTest(User[] users) throws IOException {
         LOGGER.info("START TEST add users to the store data base");
-        ResponseInfo response = UserClient.postUserList(users);
+        ResponseInfo response = UserClient.postUserArray(users);
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());
@@ -42,9 +40,9 @@ public class CreateListOfUsersTest extends AbstractTest {
         User[] duplicateUsers = new User[]{user1, user1};
 
         return new Object[][]{
-            {Arrays.asList(treeUsers)},
-            {Arrays.asList(oneUser)},
-            {Arrays.asList(duplicateUsers)},
+            {treeUsers},
+            {oneUser},
+            {duplicateUsers},
             {Collections.emptyList()}
         };
     }
