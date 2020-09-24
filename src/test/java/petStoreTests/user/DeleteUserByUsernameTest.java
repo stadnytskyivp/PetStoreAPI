@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class DeleteUserByUsernameTest extends AbstractTest {
 
-    @Description("Verify that we are can delete user from the store data base")
+    @Description("Verify that we can delete user from the store data base")
     @Test
     public void deleteUserTest() throws IOException {
 

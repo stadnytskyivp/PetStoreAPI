@@ -12,16 +12,16 @@ import java.io.IOException;
 
 public class DeleteUserNegativeTest extends AbstractTest {
 
-    @Description("Verify that we are can delete user from the store data base")
+    @Description("Verify that we can't delete non existing user from the store data base")
     @Test
     public void deleteUserTest() throws IOException {
 
-        LOGGER.info("BEFORE TEST making sure that the base won't have our user");
+        LOGGER.info("BEFORE TEST making sure that the base can't delete non existing user");
         UserClient.postUser(DataSet.addingUser());
         UserClient.deleteUserByUsername(DataSet.addingUser().getUsername());
         LOGGER.info("BEFORE TEST USER ADDED AND DELETED");
 
-        LOGGER.info("START TEST delete user from the store data base");
+        LOGGER.info("START TEST delete non existing user from the store data base");
         Response response = UserClient.deleteNonExistingUser(DataSet.addingUser().getUsername());
 
         Assert.assertTrue(response.asString().trim().isEmpty());
