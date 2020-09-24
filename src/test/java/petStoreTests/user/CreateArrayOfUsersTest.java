@@ -32,9 +32,9 @@ public class CreateArrayOfUsersTest extends AbstractTest {
 
     @DataProvider
     public Object[][] testData() {
-        User user1 = DataSet.addingUser().setId(101);
-        User user2 = DataSet.addingUser().setId(102);
-        User user3 = DataSet.addingUser().setId(103);
+        User user1 = DataSet.addingUser().setId(101L);
+        User user2 = DataSet.addingUser().setId(102L);
+        User user3 = DataSet.addingUser().setId(103L);
         User[] treeUsers = new User[]{user1, user2, user3};
         User[] oneUser = new User[]{user1};
         User[] duplicateUsers = new User[]{user1, user1};

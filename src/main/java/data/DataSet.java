@@ -53,8 +53,8 @@ public class DataSet {
 
     public static User addingUser() {
         return new User()
-            .setId(311)
-            .setUsername("Potato")
+            .setId(311L)
+            .setUsername("Potato92")
             .setFirstName("Carl")
             .setLastName("Jonson")
             .setEmail("CJ@gmail.com")

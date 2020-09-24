@@ -5,6 +5,11 @@
         <classes>
             <class name="petStoreTests.user.AddUserTest"/>
             <class name="petStoreTests.user.FindUserByUsernameTest"/>
+            <class name="petStoreTests.user.CreateArrayOfUsersTest"/>
+            <class name="petStoreTests.user.CreateListOfUsersTest"/>
+            <class name="petStoreTests.user.DeleteUserByUsernameTest"/>
+            <class name="petStoreTests.user.DeleteUserNegativeTest"/>
+            <class name="petStoreTests.user.UpdateUserTest"/>
         </classes>
     </test>
 </suite>

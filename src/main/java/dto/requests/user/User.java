@@ -3,7 +3,7 @@ package dto.requests.user;
 import java.util.Objects;
 
 public class User {
-    private long id;
+    private Long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -12,11 +12,11 @@ public class User {
     private String phone;
     private int userStatus;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public User setId(long id) {
+    public User setId(Long id) {
         this.id = id;
         return this;
     }
@@ -89,14 +89,14 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                userStatus == user.userStatus &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(phone, user.phone);
+        return userStatus == user.userStatus &&
+            Objects.equals(id, user.id) &&
+            Objects.equals(username, user.username) &&
+            Objects.equals(firstName, user.firstName) &&
+            Objects.equals(lastName, user.lastName) &&
+            Objects.equals(email, user.email) &&
+            Objects.equals(password, user.password) &&
+            Objects.equals(phone, user.phone);
     }
 
     @Override
