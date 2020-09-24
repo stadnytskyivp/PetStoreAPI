@@ -13,15 +13,13 @@ import petStoreTests.AbstractTest;
 import java.io.IOException;
 
 public class FindUserNegativeTest extends AbstractTest {
-
-    @Description("Verify that we are can find user in the store data base")
-    @Parameters({"User for adding and finding"})
+    @Description("Verify that we are can't find user in the store data base")
+    @Parameters({"User for deleting and finding"})
     @Test(dataProvider = "testData")
     public void findUserTest(User user) throws IOException {
-
-        LOGGER.info("BEFORE TEST ADD USER");
+        LOGGER.info("BEFORE TEST DELETE USER");
         UserClient.deleteUserByUsername(user.getUsername());
-        LOGGER.info("BEFORE TEST USER ADDED");
+        LOGGER.info("BEFORE TEST USER DELETED");
 
         LOGGER.info("START TEST find user in the store data base");
         User response = UserClient.getUserByUsername(user.getUsername());

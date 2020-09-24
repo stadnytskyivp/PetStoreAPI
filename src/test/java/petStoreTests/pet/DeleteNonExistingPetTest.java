@@ -13,7 +13,6 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
 public class DeleteNonExistingPetTest extends AbstractTest {
-
     @Description("Verify that we will get error trying delete defunct pet")
     @Test
     public void deleteDefunctPetTest() throws IOException {
@@ -27,5 +26,4 @@ public class DeleteNonExistingPetTest extends AbstractTest {
         Assert.assertTrue(response.asString().trim().isEmpty());
         LOGGER.info("END TEST");
     }
-
 }

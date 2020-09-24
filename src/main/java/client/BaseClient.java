@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class BaseClient {
-
     final private static String BASE_URI = "https://petstore.swagger.io";
     protected static final Logger LOGGER = LoggerFactory.getLogger(PetClient.class);
 
@@ -25,7 +24,7 @@ public class BaseClient {
             .build();
     }
 
-    @Step("Building request specification")
+    @Step("Building request specification without any response checking")
     public static RequestSpecification buildUncheckedReq() throws IOException {
         LOGGER.debug("building request specification ");
         return new RequestSpecBuilder()

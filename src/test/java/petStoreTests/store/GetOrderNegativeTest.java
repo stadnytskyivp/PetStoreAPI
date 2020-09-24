@@ -13,7 +13,6 @@ import static data.DataSet.addingOrder;
 import static data.DataSet.messageNotFoundResponse;
 
 public class GetOrderNegativeTest extends AbstractTest {
-
     @Description("Verify that we will get error message by getting nonexistent order by id")
     @Test
     public void getOrderTest() throws IOException {

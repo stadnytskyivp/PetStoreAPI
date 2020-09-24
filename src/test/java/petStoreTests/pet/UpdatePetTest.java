@@ -19,7 +19,6 @@ import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
 public class UpdatePetTest extends AbstractTest {
-
     @Description("Verify that we are updating pet info")
     @Parameters({"Pet for updating"})
     @Test(dataProvider = "positiveTests")
@@ -29,7 +28,7 @@ public class UpdatePetTest extends AbstractTest {
         LOGGER.info("BEFORE TEST pet added");
 
         LOGGER.info("START TEST add pet to the store ");
-        Pet response = PetClient.postPet(simplePet);
+        Pet response = PetClient.putPet(simplePet);
 
         Assert.assertEquals(response.getName(), simplePet.getName());
         Assert.assertEquals(response.getStatus(), simplePet.getStatus());

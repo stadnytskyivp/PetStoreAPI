@@ -19,7 +19,7 @@ public class PetClient extends BaseClient {
     final private static String PET_IMAGE_UPLOAD_ENDPOINT = PET_ENDPOINT + "%s/uploadImage";    // setting here pet ID
 
 
-    @Step("Adding pet to the store")
+    @Step("Sending POST request to /pet")
     public static Pet postPet(Pet petToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -40,7 +40,7 @@ public class PetClient extends BaseClient {
             .as(Pet.class);
     }
 
-    @Step("Getting pet by ID {0}")
+    @Step("Sending GET request to /pet by ID {0}")
     public static Pet getPetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -59,7 +59,7 @@ public class PetClient extends BaseClient {
             .as(Pet.class);
     }
 
-    @Step("Getting non existing pet by ID {0}")
+    @Step("Sending GET request to /pet by ID {0}")
     public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -78,7 +78,7 @@ public class PetClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Deleting pet by ID {0}")
+    @Step("Sending DELETE request to /pet by ID {0}")
     public static ResponseInfo deletePetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -98,7 +98,7 @@ public class PetClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Deleting defunct pet by ID {0}")
+    @Step("Sending DELETE request to /pet by ID {0}")
     public static Response deleteNonExistingPetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -117,7 +117,7 @@ public class PetClient extends BaseClient {
             .response();
     }
 
-    @Step("Getting list of pets with specific status {0}")
+    @Step("Sending GET request to /pet/findByStatus by pet status {0}")
     public static List<Pet> getPetByStatus(EStatus petStatus) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -135,7 +135,7 @@ public class PetClient extends BaseClient {
             .as(Pet[].class));
     }
 
-    @Step("Adding pet photo to the pet")
+    @Step("Sending POST request to /pet/petId/uploadImage by pet Id {0}")
     public static ResponseInfo postPetPicture(Long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -157,7 +157,7 @@ public class PetClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Updating pet to the store")
+    @Step("Sending PUT request to /pet")
     public static Pet putPet(Pet petToPut) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()

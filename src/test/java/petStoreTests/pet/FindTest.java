@@ -14,7 +14,6 @@ import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
 public class FindTest extends AbstractTest {
-
     @Description("Verify that we are getting pets by id")
     @Test
     public void getPetTest() throws IOException {
@@ -33,5 +32,4 @@ public class FindTest extends AbstractTest {
         Assert.assertEquals(pet.getTags().getClass(), pet.getTags().getClass());
         LOGGER.info("END TEST");
     }
-
 }

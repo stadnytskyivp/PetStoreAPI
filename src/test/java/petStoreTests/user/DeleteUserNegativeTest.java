@@ -11,11 +11,9 @@ import petStoreTests.AbstractTest;
 import java.io.IOException;
 
 public class DeleteUserNegativeTest extends AbstractTest {
-
     @Description("Verify that we can't delete non existing user from the store data base")
     @Test
     public void deleteUserTest() throws IOException {
-
         LOGGER.info("BEFORE TEST making sure that the base can't delete non existing user");
         UserClient.postUser(DataSet.addingUser());
         UserClient.deleteUserByUsername(DataSet.addingUser().getUsername());

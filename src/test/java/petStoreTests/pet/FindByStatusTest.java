@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class FindByStatusTest extends AbstractTest {
-
     @Story("Searching pets by status")
     @Description("Verify that we are getting pets by the right status")
     @Parameters({"Status for searching"})

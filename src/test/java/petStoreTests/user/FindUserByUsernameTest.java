@@ -13,12 +13,10 @@ import petStoreTests.AbstractTest;
 import java.io.IOException;
 
 public class FindUserByUsernameTest extends AbstractTest {
-
     @Description("Verify that we are can find user in the store data base")
     @Parameters({"User for adding and finding"})
     @Test(dataProvider = "testData")
     public void findUserTest(User user) throws IOException {
-
         LOGGER.info("BEFORE TEST ADD USER");
         UserClient.postUser(user);
         LOGGER.info("BEFORE TEST USER ADDED");

@@ -12,7 +12,6 @@ import java.io.IOException;
 import static data.DataSet.*;
 
 public class DeleteOrderTest extends AbstractTest {
-
     @Description("Verify that we are deleting order")
     @Test
     public static void deleteOrderTest() throws IOException {

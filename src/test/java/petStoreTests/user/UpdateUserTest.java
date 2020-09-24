@@ -15,13 +15,12 @@ import petStoreTests.AbstractTest;
 import java.io.IOException;
 
 public class UpdateUserTest extends AbstractTest {
-
     @Description("Verify that we are editing user data in the store data base")
     @Parameters({"User for editing"})
     @Test(dataProvider = "testData")
     public void updateUserTest(User expectedUser) throws IOException {
         LOGGER.info("BEFORE TEST ADDING USER");
-        UserClient.postUser(expectedUser);
+        UserClient.postUser(DataSet.addingUser());
         LOGGER.info("BEFORE TEST USER ADDED");
 
         LOGGER.info("START TEST edit user info in the store data base");

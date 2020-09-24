@@ -19,13 +19,11 @@ import static data.DataSet.addingPet;
 import static data.ReusableMethods.getBigData;
 
 public class AddTest extends AbstractTest {
-
     @Description("Verify that we are adding petStoreTests.pet to the petStoreTests.store")
     @Parameters({"Pet for adding"})
     @Test(dataProvider = "positiveTests")
     public void addPetTest(Pet simplePet) throws IOException {
         LOGGER.info("START TEST add petStoreTests.pet to the petStoreTests.store ");
-
         Pet response = PetClient.postPet(simplePet);
 
         Assert.assertNotNull(response.getId());

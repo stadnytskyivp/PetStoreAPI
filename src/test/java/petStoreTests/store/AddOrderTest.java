@@ -14,9 +14,7 @@ import java.io.IOException;
 import static client.StoreClient.deleteOrderById;
 import static data.DataSet.addingOrder;
 
-
 public class AddOrderTest extends AbstractTest {
-
     @Description("Verify that we are adding order to the store")
     @Parameters({"Order for adding"})
     @Test(dataProvider = "testData")

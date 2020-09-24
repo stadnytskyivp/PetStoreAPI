@@ -13,11 +13,9 @@ import java.io.IOException;
 import static data.DataSet.addingOrder;
 
 public class GetOrderTest extends AbstractTest {
-
     @Description("Verify that we are getting order by id")
     @Test
     public void getOrderTest() throws IOException {
-
         LOGGER.info("BEFORE TEST adding a order");
         StoreClient.postOrder(addingOrder());
         LOGGER.info("BEFORE TEST order added");

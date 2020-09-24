@@ -15,7 +15,6 @@ import static data.DataSet.addingPet;
 import static data.DataSet.messageNotFoundResponse;
 
 public class FindNegativeTest extends AbstractTest {
-
     @Description("Verify that we will get error message by getting defunct pet by id")
     @Test
     public void getDefunctPetTest() throws IOException {
@@ -31,5 +30,4 @@ public class FindNegativeTest extends AbstractTest {
         Assert.assertEquals(res.getMessage(), messageNotFoundResponse().getMessage());
         LOGGER.info("END TEST");
     }
-
 }

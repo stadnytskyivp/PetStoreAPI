@@ -14,7 +14,6 @@ import static data.DataSet.addingPet;
 import static data.DataSet.messageUnknownResponse;
 
 public class DeleteTest extends AbstractTest {
-
     @Description("Verify that we are deleting petStoreTests.pet")
     @Test
     public static void deletePetTest() throws IOException {
@@ -30,5 +29,4 @@ public class DeleteTest extends AbstractTest {
         Assert.assertEquals(response.getMessage(), messageUnknownResponse().getMessage());
         LOGGER.info("END TEST");
     }
-
 }

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class DataSet {
-
     public static Pet addingPet() {
         PetCategory petCategory = new PetCategory().setId(666).setName("Imp");
 

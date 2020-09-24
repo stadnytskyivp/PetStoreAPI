@@ -16,7 +16,7 @@ public class UserClient extends BaseClient {
     final private static String USER_LIST_ENDPOINT = USER_ENDPOINT + "createWithList";
     final private static String USER_ARRAY_ENDPOINT = USER_ENDPOINT + "createWithArray";
 
-    @Step("Adding user to the store data base")
+    @Step("Sending POST request to /user")
     public static ResponseInfo postUser(User userToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -37,7 +37,7 @@ public class UserClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Getting user by username {0}")
+    @Step("Sending GET request to /user with username {0}")
     public static User getUserByUsername(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -57,7 +57,7 @@ public class UserClient extends BaseClient {
             .as(User.class);
     }
 
-    @Step("Deleting USER by username {0}")
+    @Step("Sending DELETE request to /user with username {0}")
     public static ResponseInfo deleteUserByUsername(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -77,7 +77,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Deleting USER by username {0}")
+    @Step("Sending DELETE request to /user with username {0}")
     public static Response deleteNonExistingUser(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -96,7 +96,7 @@ public class UserClient extends BaseClient {
                 .response();
     }
 
-    @Step("Adding user to the store data base")
+    @Step("Sending PUT request to /user with username {0}")
     public static ResponseInfo updateUser(User userToPut) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -117,7 +117,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Adding users to the store data base")
+    @Step("Sending POST request to /user/createWithList")
     public static ResponseInfo postUserList(List<User> usersToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -138,7 +138,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Adding users to the store data base")
+    @Step("Sending POST request to /user/createWithArray")
     public static ResponseInfo postUserArray(User[] usersToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
