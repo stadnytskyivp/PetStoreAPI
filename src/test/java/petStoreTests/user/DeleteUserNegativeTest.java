@@ -2,9 +2,8 @@ package petStoreTests.user;
 
 import client.UserClient;
 import data.DataSet;
+import dto.requests.user.User;
 import io.qameta.allure.Description;
-import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import petStoreTests.AbstractTest;
 
@@ -15,14 +14,13 @@ public class DeleteUserNegativeTest extends AbstractTest {
     @Test
     public void deleteUserTest() throws IOException {
         LOGGER.info("BEFORE TEST making sure that the base can't delete non existing user");
-        UserClient.postUser(DataSet.addingUser());
-        UserClient.deleteUserByUsername(DataSet.addingUser().getUsername());
+        User user = DataSet.addingUser();
+        UserClient.postUser(user);
+        UserClient.deleteUserByUsername(user.getUsername());
         LOGGER.info("BEFORE TEST USER ADDED AND DELETED");
 
         LOGGER.info("START TEST delete non existing user from the store data base");
-        Response response = UserClient.deleteNonExistingUser(DataSet.addingUser().getUsername());
-
-        Assert.assertTrue(response.asString().trim().isEmpty());
+        UserClient.deleteNonExistingUser(user.getUsername());   // checking for 404 status code
         LOGGER.info("END TEST");
     }
 }

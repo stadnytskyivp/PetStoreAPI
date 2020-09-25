@@ -20,11 +20,13 @@ public class UpdateUserTest extends AbstractTest {
     @Test(dataProvider = "testData")
     public void updateUserTest(User expectedUser) throws IOException {
         LOGGER.info("BEFORE TEST ADDING USER");
-        UserClient.postUser(DataSet.addingUser());
+        UserClient.deleteNonCheckedUser(expectedUser.getUsername());
+        User oldUser = DataSet.addingUser();
+        UserClient.postUser(oldUser);
         LOGGER.info("BEFORE TEST USER ADDED");
 
         LOGGER.info("START TEST edit user info in the store data base");
-        ResponseInfo response = UserClient.updateUser(expectedUser);
+        ResponseInfo response = UserClient.updateUser(oldUser.getUsername(), expectedUser.setId(oldUser.getId()));
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());

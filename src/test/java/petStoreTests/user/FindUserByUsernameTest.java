@@ -24,8 +24,8 @@ public class FindUserByUsernameTest extends AbstractTest {
         LOGGER.info("START TEST find user in the store data base");
         User response = UserClient.getUserByUsername(user.getUsername());
 
-        Assert.assertTrue(response.getId() >= 0);
-        Assert.assertTrue(response.getUserStatus() >= 0);
+        Assert.assertNotNull(response.getId());
+        Assert.assertNotNull(response.getUserStatus());
         Assert.assertEquals(response.getUsername(), user.getUsername());
         Assert.assertEquals(response.getFirstName(), user.getFirstName());
         Assert.assertEquals(response.getLastName(), user.getLastName());

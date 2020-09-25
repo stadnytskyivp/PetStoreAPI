@@ -10,7 +10,7 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private int userStatus;
+    private Integer userStatus;
 
     public Long getId() {
         return id;
@@ -75,11 +75,11 @@ public class User {
         return this;
     }
 
-    public int getUserStatus() {
+    public Integer getUserStatus() {
         return userStatus;
     }
 
-    public User setUserStatus(int userStatus) {
+    public User setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
         return this;
     }
@@ -89,18 +89,32 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userStatus == user.userStatus &&
-            Objects.equals(id, user.id) &&
+        return Objects.equals(id, user.id) &&
             Objects.equals(username, user.username) &&
             Objects.equals(firstName, user.firstName) &&
             Objects.equals(lastName, user.lastName) &&
             Objects.equals(email, user.email) &&
             Objects.equals(password, user.password) &&
-            Objects.equals(phone, user.phone);
+            Objects.equals(phone, user.phone) &&
+            Objects.equals(userStatus, user.userStatus);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, username, firstName, lastName, email, password, phone, userStatus);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", phone='" + phone + '\'' +
+            ", userStatus=" + userStatus +
+            '}';
     }
 }

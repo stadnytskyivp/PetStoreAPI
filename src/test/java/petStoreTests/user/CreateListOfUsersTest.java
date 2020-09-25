@@ -25,7 +25,7 @@ public class CreateListOfUsersTest extends AbstractTest {
         LOGGER.info("BEFORE TEST DELETING users");
         if (users.size() != 0){
             for (User user : users) {
-                UserClient.deleteUserByUsername(user.getUsername());
+                UserClient.deleteNonCheckedUser(user.getUsername());
             }
         }
         LOGGER.info("BEFORE TEST users DELETED");
@@ -48,15 +48,15 @@ public class CreateListOfUsersTest extends AbstractTest {
 
     @DataProvider
     public Object[][] testData() {
-        User user1 = DataSet.addingUser().setUsername("Leyline_Tyrant1").setId(101L);
-        User user2 = DataSet.addingUser().setUsername("Leyline_Tyrant2").setId(102L);
-        User user3 = DataSet.addingUser().setUsername("Leyline_Tyrant3").setId(103L);
+        User user1 = DataSet.addingUser();
+        User user2 = DataSet.addingUser();
+        User user3 = DataSet.addingUser();
         User[] treeUsers = new User[]{user1, user2, user3};
         User[] oneUser = new User[]{user1};
 
         return new Object[][]{
-            {Arrays.asList(treeUsers)},
             {Arrays.asList(oneUser)},
+            {Arrays.asList(treeUsers)},
             {Collections.emptyList()}
         };
     }

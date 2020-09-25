@@ -17,18 +17,19 @@ public class AddUserTest extends AbstractTest {
     @Test
     public void addUserTest() throws IOException {
         LOGGER.info("START TEST add user to the store data base");
-        ResponseInfo response = UserClient.postUser(DataSet.addingUser());
+        User user = DataSet.addingUser();
+        ResponseInfo response = UserClient.postUser(user);
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());
-        Assert.assertEquals(response.getMessage(), String.valueOf(DataSet.addingUser().getId()));
+        Assert.assertEquals(response.getMessage(), String.valueOf(user.getId()));
 
-        User newUser = UserClient.getUserByUsername(DataSet.addingUser().getUsername());
-        Assert.assertEquals(newUser.getId(), DataSet.addingUser().getId());
+        User newUser = UserClient.getUserByUsername(user.getUsername());
+        Assert.assertEquals(newUser.getId(), user.getId());
         LOGGER.info("END TEST");
 
         LOGGER.info("AFTER TEST DELETING USER");
-        UserClient.deleteUserByUsername(DataSet.addingUser().getUsername());
+        UserClient.deleteUserByUsername(user.getUsername());
         LOGGER.info("AFTER TEST USER DELETED");
     }
 }

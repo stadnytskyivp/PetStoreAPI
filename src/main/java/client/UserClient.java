@@ -97,7 +97,7 @@ public class UserClient extends BaseClient {
     }
 
     @Step("Sending PUT request to /user with username {0}")
-    public static ResponseInfo updateUser(User userToPut) throws IOException {
+    public static ResponseInfo updateUser(String oldUsername, User userToPut) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
                 .spec(buildReq())
@@ -106,7 +106,7 @@ public class UserClient extends BaseClient {
         LOGGER.debug("expecting response");
         return res
                 .when()
-                .put(USER_ENDPOINT + userToPut.getUsername())
+                .put(USER_ENDPOINT + oldUsername)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .spec(buildRes())
@@ -157,5 +157,23 @@ public class UserClient extends BaseClient {
             .extract()
             .response()
             .as(ResponseInfo.class);
+    }
+
+    @Step("Sending DELETE request to /user with username {0} if they exist")
+    public static Response deleteNonCheckedUser(String username) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildUncheckedReq());
+
+        LOGGER.debug("expecting response");
+        return res
+            .when()
+            .delete(USER_ENDPOINT + username)
+            .then()
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response();
     }
 }
