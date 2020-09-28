@@ -59,7 +59,7 @@ public class PetClient extends BaseClient {
             .as(Pet.class);
     }
 
-    @Step("Sending GET request to /pet by ID {0}")
+    @Step("Sending GET request  for non existent pet to /pet by ID {0}")
     public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -98,7 +98,7 @@ public class PetClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Sending DELETE request to /pet by ID {0}")
+    @Step("Sending DELETE request for non existent order to /pet by ID {0}")
     public static Response deleteNonExistingPetById(long petId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()

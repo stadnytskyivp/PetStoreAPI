@@ -52,7 +52,6 @@ public class DataSet {
 
     public static User addingUser() {
         return new User()
-            .setId(Long.parseLong(""+ReusableMethods.getRandomNumber()))
             .setUsername(ReusableMethods.getRandomUsername())
             .setFirstName("Carl")
             .setLastName("Jonson")

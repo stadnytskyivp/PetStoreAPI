@@ -2,6 +2,7 @@ package petStoreTests.user;
 
 import client.UserClient;
 import data.DataSet;
+import data.ReusableMethods;
 import dto.requests.ResponseInfo;
 import dto.requests.user.User;
 import io.qameta.allure.Description;
@@ -30,12 +31,12 @@ public class UpdateUserTest extends AbstractTest {
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());
-        Assert.assertEquals(response.getMessage(), String.valueOf(expectedUser.getId()));
+        Assert.assertNotNull(response.getMessage());
 
         LOGGER.info("CHECK THE CHANGES");
         User actualUser = UserClient.getUserByUsername(expectedUser.getUsername());
 
-        Assert.assertEquals(actualUser, expectedUser);
+        ReusableMethods.compareUsers(actualUser, expectedUser);
         LOGGER.info("END TEST");
 
         LOGGER.info("AFTER TEST DELETING USER");

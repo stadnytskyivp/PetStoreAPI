@@ -77,7 +77,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Sending DELETE request to /user with username {0}")
+    @Step("Sending DELETE request for non existent user to /user with username {0}")
     public static Response deleteNonExistingUser(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -96,7 +96,7 @@ public class UserClient extends BaseClient {
                 .response();
     }
 
-    @Step("Sending PUT request to /user with username {0}")
+    @Step("Sending PUT request to /user with username {0} for updating information")
     public static ResponseInfo updateUser(String oldUsername, User userToPut) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -117,7 +117,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Sending POST request to /user/createWithList")
+    @Step("Sending POST request for creating list of users to /user/createWithList")
     public static ResponseInfo postUserList(List<User> usersToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -138,7 +138,7 @@ public class UserClient extends BaseClient {
                 .as(ResponseInfo.class);
     }
 
-    @Step("Sending POST request to /user/createWithArray")
+    @Step("Sending POST request for creating an array of users to /user/createWithArray")
     public static ResponseInfo postUserArray(User[] usersToPost) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -159,7 +159,7 @@ public class UserClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Sending DELETE request to /user with username {0} if they exist")
+    @Step("Sending DELETE request without any checks to /user with username {0} if they exist")
     public static Response deleteNonCheckedUser(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -177,7 +177,7 @@ public class UserClient extends BaseClient {
             .response();
     }
 
-    @Step("Sending GET request to /user with username {0}")
+    @Step("Sending GET request for trying getting non existing user to /user with username {0}")
     public static ResponseInfo getNonExistingUser(String username) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()

@@ -2,6 +2,7 @@ package petStoreTests.user;
 
 import client.UserClient;
 import data.DataSet;
+import data.ReusableMethods;
 import dto.requests.ResponseInfo;
 import dto.requests.user.User;
 import io.qameta.allure.Description;
@@ -37,7 +38,7 @@ public class CreateArrayOfUsersTest extends AbstractTest {
         if (users.length != 0){
             for (User user : users) {
                 User actualUser = UserClient.getUserByUsername(user.getUsername());
-                Assert.assertEquals(actualUser.getUsername(), user.getUsername());
+                ReusableMethods.compareUsers(actualUser, user);
             }
         }
         LOGGER.info("END TEST");

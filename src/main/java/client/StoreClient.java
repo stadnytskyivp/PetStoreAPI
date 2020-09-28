@@ -75,7 +75,7 @@ public class StoreClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Sending GET request to /store/order by ID {0}")
+    @Step("Sending GET request for non existent order to /store/order by ID {0}")
     public static ResponseInfo getNonexistentOrderById(long orderId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
@@ -95,7 +95,7 @@ public class StoreClient extends BaseClient {
             .as(ResponseInfo.class);
     }
 
-    @Step("Sending DELETE request to /store/order by ID {0}")
+    @Step("Sending DELETE request for non existent order to /store/order by ID {0}")
     public static ResponseInfo deleteNonExistingOrderById(long orderId) throws IOException {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()

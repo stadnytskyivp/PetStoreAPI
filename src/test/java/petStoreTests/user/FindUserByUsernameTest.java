@@ -2,6 +2,7 @@ package petStoreTests.user;
 
 import client.UserClient;
 import data.DataSet;
+import data.ReusableMethods;
 import dto.requests.user.User;
 import io.qameta.allure.Description;
 import org.testng.Assert;
@@ -16,22 +17,15 @@ public class FindUserByUsernameTest extends AbstractTest {
     @Description("Verify that we are can find user in the store data base")
     @Parameters({"User for adding and finding"})
     @Test(dataProvider = "testData")
-    public void findUserTest(User user) throws IOException {
+    public void findUserTest(User expectedUser) throws IOException {
         LOGGER.info("BEFORE TEST ADD USER");
-        UserClient.postUser(user);
+        UserClient.postUser(expectedUser);
         LOGGER.info("BEFORE TEST USER ADDED");
 
         LOGGER.info("START TEST find user in the store data base");
-        User response = UserClient.getUserByUsername(user.getUsername());
+        User actualUser = UserClient.getUserByUsername(expectedUser.getUsername());
 
-        Assert.assertNotNull(response.getId());
-        Assert.assertNotNull(response.getUserStatus());
-        Assert.assertEquals(response.getUsername(), user.getUsername());
-        Assert.assertEquals(response.getFirstName(), user.getFirstName());
-        Assert.assertEquals(response.getLastName(), user.getLastName());
-        Assert.assertEquals(response.getEmail(), user.getEmail());
-        Assert.assertEquals(response.getPassword(), user.getPassword());
-        Assert.assertEquals(response.getPhone(), user.getPhone());
+        ReusableMethods.compareUsers(actualUser, expectedUser);
         LOGGER.info("END TEST");
     }
 

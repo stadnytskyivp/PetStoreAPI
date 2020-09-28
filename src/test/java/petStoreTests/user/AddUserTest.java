@@ -2,6 +2,7 @@ package petStoreTests.user;
 
 import client.UserClient;
 import data.DataSet;
+import data.ReusableMethods;
 import dto.requests.ResponseInfo;
 import dto.requests.user.User;
 import io.qameta.allure.Description;
@@ -22,10 +23,10 @@ public class AddUserTest extends AbstractTest {
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
         Assert.assertEquals(response.getType(), DataSet.messageUnknownResponse().getType());
-        Assert.assertEquals(response.getMessage(), String.valueOf(user.getId()));
+        Assert.assertNotNull(response.getMessage());
 
         User newUser = UserClient.getUserByUsername(user.getUsername());
-        Assert.assertEquals(newUser.getId(), user.getId());
+        ReusableMethods.compareUsers(newUser, user);
         LOGGER.info("END TEST");
 
         LOGGER.info("AFTER TEST DELETING USER");
