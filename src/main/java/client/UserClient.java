@@ -176,4 +176,24 @@ public class UserClient extends BaseClient {
             .extract()
             .response();
     }
+
+    @Step("Sending GET request to /user with username {0}")
+    public static ResponseInfo getNonExistingUser(String username) throws IOException {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildUncheckedReq());
+
+        LOGGER.debug("expecting response");
+        return res
+            .when()
+            .get(USER_ENDPOINT + username)
+            .then()
+            .statusCode(HttpStatus.SC_NOT_FOUND)
+            .spec(buildUncheckedRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(ResponseInfo.class);
+    }
 }

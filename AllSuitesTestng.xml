@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" name="Pet tests">
+        <classes>
+            <class name="petStoreTests.pet.AddTest"/>
+            <class name="petStoreTests.pet.DeleteNonExistingPetTest"/>
+            <class name="petStoreTests.pet.DeleteTest"/>
+            <class name="petStoreTests.pet.FindByStatusTest"/>
+            <class name="petStoreTests.pet.FindNegativeTest"/>
+            <class name="petStoreTests.pet.FindTest"/>
+            <class name="petStoreTests.pet.UpdatePetTest"/>
+            <class name="petStoreTests.pet.AddPhotoTest"/>
+        </classes>
+    </test>
+    <test verbose="2" name="Order tests">
+        <classes>
+            <class name="petStoreTests.order.AddOrderTest"/>
+            <class name="petStoreTests.order.GetOrderTest"/>
+            <class name="petStoreTests.order.GetOrderNegativeTest"/>
+            <class name="petStoreTests.order.DeleteOrderTest"/>
+        </classes>
+    </test>
+    <test verbose="2" name="User tests">
+            <classes>
+            <class name="petStoreTests.user.AddUserTest"/>
+            <class name="petStoreTests.user.FindUserByUsernameTest"/>
+            <class name="petStoreTests.user.FindUserNegativeTest"/>
+            <class name="petStoreTests.user.CreateArrayOfUsersTest"/>
+            <class name="petStoreTests.user.CreateListOfUsersTest"/>
+            <class name="petStoreTests.user.DeleteUserByUsernameTest"/>
+            <class name="petStoreTests.user.DeleteUserNegativeTest"/>
+            <class name="petStoreTests.user.UpdateUserTest"/>
+        </classes>
+    </test>
+</suite>

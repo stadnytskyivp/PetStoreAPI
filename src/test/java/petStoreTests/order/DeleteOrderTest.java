@@ -1,4 +1,4 @@
-package petStoreTests.store;
+package petStoreTests.order;
 
 import client.StoreClient;
 import dto.requests.ResponseInfo;

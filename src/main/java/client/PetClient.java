@@ -140,7 +140,7 @@ public class PetClient extends BaseClient {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildUncheckedReq())
-            .multiPart("file", new File(System.getProperty("petStoreTests.user.dir") +
+            .multiPart("file", new File(System.getProperty("user.dir") +
                 "/img/imp.png"));
 
         LOGGER.debug("expecting response");
