@@ -15,10 +15,10 @@ public class FindTest {
     @Description("Verify that we are getting pets by id")
     @Test
     public void getPetTest() {
-        Allure.step("Before test adding a pet");
+        Allure.step("Before test adding pet");
         postPet(addingPet());
 
-        Allure.step("Start test find pet in the store data base");
+        Allure.step("Start test find pet in the store");
         Pet pet = PetClient.getPetById(DataSet.addingPet().getId());
 
         Assert.assertEquals(pet.getId(), addingPet().getId());

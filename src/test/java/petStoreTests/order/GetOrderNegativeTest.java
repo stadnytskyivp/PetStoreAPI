@@ -18,7 +18,7 @@ public class GetOrderNegativeTest {
         StoreClient.postOrder(addingOrder());
         StoreClient.deleteOrderById(addingOrder().getId());
 
-        Allure.step("Start test try to find nonexistent order in the store");
+        Allure.step("Start test try to find non existing order in the store");
         ResponseInfo response = StoreClient.getNonexistentOrderById(addingOrder().getId());
 
         Assert.assertEquals(response.getCode(), messageNotFoundResponse().getCode());

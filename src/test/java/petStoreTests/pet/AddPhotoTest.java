@@ -14,10 +14,10 @@ public class AddPhotoTest {
     @Description("Verify that we can add a pet photo to the existing pet")
     @Test
     public void addPetPhotoTest() {
-        Allure.step("Before test adding a pet");
+        Allure.step("Before test adding pet");
         postPet(addingPet());
 
-        Allure.step("Start test add pet photo to the existing pet");
+        Allure.step("Start test adding pets photo to the existing pet");
         ResponseInfo response = PetClient.postPetPicture(addingPet().getId());
 
         Assert.assertTrue(response.getMessage().contains("imp.png"));

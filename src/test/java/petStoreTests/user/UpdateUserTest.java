@@ -23,7 +23,7 @@ public class UpdateUserTest {
         User oldUser = DataSet.addingUser();
         UserClient.postUser(oldUser);
 
-        Allure.step("Start test edit user info in the store");
+        Allure.step("Start test edit user info");
         ResponseInfo response = UserClient.updateUser(oldUser.getUsername(), expectedUser.setId(oldUser.getId()));
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);
