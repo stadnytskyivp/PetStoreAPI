@@ -22,7 +22,7 @@ public class ReusableMethods {
         return properties.toString();
     }
 
-    public static void compareUsers(User newUser, User expectedUser){
+    public static void compareUsers(User newUser, User expectedUser) {
         Assert.assertNotNull(newUser.getId());
         Assert.assertNotNull(newUser.getUserStatus());
         Assert.assertEquals(newUser.getUsername(), expectedUser.getUsername());

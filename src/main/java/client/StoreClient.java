@@ -7,7 +7,6 @@ import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
-import java.io.IOException;
 import java.util.Formatter;
 
 public class StoreClient extends BaseClient {
@@ -15,7 +14,7 @@ public class StoreClient extends BaseClient {
     final private static String STORE_ORDER_BY_ID_ENDPOINT = STORE_ORDER_ENDPOINT + "/%s";
 
     @Step("Sending POST request to /store/order")
-    public static Order postOrder(Order orderToPost) throws IOException {
+    public static Order postOrder(Order orderToPost) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq())
@@ -36,7 +35,7 @@ public class StoreClient extends BaseClient {
     }
 
     @Step("Sending GET request to /store/order by ID {0}")
-    public static Order getOrderById(long orderId) throws IOException {
+    public static Order getOrderById(long orderId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -56,7 +55,7 @@ public class StoreClient extends BaseClient {
     }
 
     @Step("Sending DELETE request to /store/order by ID {0}")
-    public static ResponseInfo deleteOrderById(long orderId) throws IOException {
+    public static ResponseInfo deleteOrderById(long orderId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -76,7 +75,7 @@ public class StoreClient extends BaseClient {
     }
 
     @Step("Sending GET request for non existent order to /store/order by ID {0}")
-    public static ResponseInfo getNonexistentOrderById(long orderId) throws IOException {
+    public static ResponseInfo getNonexistentOrderById(long orderId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -96,7 +95,7 @@ public class StoreClient extends BaseClient {
     }
 
     @Step("Sending DELETE request for non existent order to /store/order by ID {0}")
-    public static ResponseInfo deleteNonExistingOrderById(long orderId) throws IOException {
+    public static ResponseInfo deleteNonExistingOrderById(long orderId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());

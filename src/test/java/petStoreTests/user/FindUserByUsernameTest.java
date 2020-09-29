@@ -4,29 +4,24 @@ import client.UserClient;
 import data.DataSet;
 import data.ReusableMethods;
 import dto.requests.user.User;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import petStoreTests.AbstractTest;
 
-import java.io.IOException;
-
-public class FindUserByUsernameTest extends AbstractTest {
+public class FindUserByUsernameTest {
     @Description("Verify that we are can find user in the store data base")
     @Parameters({"User for adding and finding"})
     @Test(dataProvider = "testData")
-    public void findUserTest(User expectedUser) throws IOException {
-        LOGGER.info("BEFORE TEST ADD USER");
+    public void findUserTest(User expectedUser) {
+        Allure.step("Before test add user");
         UserClient.postUser(expectedUser);
-        LOGGER.info("BEFORE TEST USER ADDED");
 
-        LOGGER.info("START TEST find user in the store data base");
+        Allure.step("Start test find user in the store data base");
         User actualUser = UserClient.getUserByUsername(expectedUser.getUsername());
 
         ReusableMethods.compareUsers(actualUser, expectedUser);
-        LOGGER.info("END TEST");
     }
 
     @DataProvider

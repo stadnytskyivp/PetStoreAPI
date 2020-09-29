@@ -9,14 +9,12 @@ import io.restassured.specification.ResponseSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 public class BaseClient {
     final private static String BASE_URI = "https://petstore.swagger.io";
     protected static final Logger LOGGER = LoggerFactory.getLogger(PetClient.class);
 
     @Step("Building request specification")
-    public static RequestSpecification buildReq() throws IOException {
+    public static RequestSpecification buildReq() {
         LOGGER.debug("building request specification ");
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)
@@ -25,7 +23,7 @@ public class BaseClient {
     }
 
     @Step("Building request specification without any response checking")
-    public static RequestSpecification buildUncheckedReq() throws IOException {
+    public static RequestSpecification buildUncheckedReq() {
         LOGGER.debug("building request specification ");
         return new RequestSpecBuilder()
             .setBaseUri(BASE_URI)

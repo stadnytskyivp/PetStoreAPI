@@ -1,8 +1,8 @@
 package client;
 
-import enums.EStatus;
-import dto.requests.pet.Pet;
 import dto.requests.ResponseInfo;
+import dto.requests.pet.Pet;
+import enums.EStatus;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,8 +10,9 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Formatter;
+import java.util.List;
 
 public class PetClient extends BaseClient {
     final private static String PET_ENDPOINT = "/v2/pet/";
@@ -20,7 +21,7 @@ public class PetClient extends BaseClient {
 
 
     @Step("Sending POST request to /pet")
-    public static Pet postPet(Pet petToPost) throws IOException {
+    public static Pet postPet(Pet petToPost) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq())
@@ -41,7 +42,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending GET request to /pet by ID {0}")
-    public static Pet getPetById(long petId) throws IOException {
+    public static Pet getPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -60,7 +61,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending GET request  for non existent pet to /pet by ID {0}")
-    public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
+    public static ResponseInfo getNonExistingPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -79,7 +80,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending DELETE request to /pet by ID {0}")
-    public static ResponseInfo deletePetById(long petId) throws IOException {
+    public static ResponseInfo deletePetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -99,7 +100,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending DELETE request for non existent order to /pet by ID {0}")
-    public static Response deleteNonExistingPetById(long petId) throws IOException {
+    public static Response deleteNonExistingPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -118,7 +119,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending GET request to /pet/findByStatus by pet status {0}")
-    public static List<Pet> getPetByStatus(EStatus petStatus) throws IOException {
+    public static List<Pet> getPetByStatus(EStatus petStatus) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -136,7 +137,7 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending POST request to /pet/petId/uploadImage by pet Id {0}")
-    public static ResponseInfo postPetPicture(Long petId) throws IOException {
+    public static ResponseInfo postPetPicture(Long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildUncheckedReq())
@@ -158,23 +159,23 @@ public class PetClient extends BaseClient {
     }
 
     @Step("Sending PUT request to /pet")
-    public static Pet putPet(Pet petToPut) throws IOException {
+    public static Pet putPet(Pet petToPut) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
-                .spec(buildReq())
-                .body(petToPut);
+            .spec(buildReq())
+            .body(petToPut);
 
         LOGGER.debug("expecting response");
         return res
-                .when()
-                .put(PET_ENDPOINT)
-                .then()
-                .statusCode(HttpStatus.SC_OK)
-                .spec(buildRes())
-                .log()
-                .body()
-                .extract()
-                .response()
-                .as(Pet.class);
+            .when()
+            .put(PET_ENDPOINT)
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(Pet.class);
     }
 }
