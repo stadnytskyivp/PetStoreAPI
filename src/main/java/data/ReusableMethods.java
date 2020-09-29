@@ -23,7 +23,7 @@ public class ReusableMethods {
     }
 
     public static void compareUsers(User newUser, User expectedUser){
-        Assert.assertNotNull(newUser);
+        Assert.assertNotNull(newUser.getId());
         Assert.assertNotNull(newUser.getUserStatus());
         Assert.assertEquals(newUser.getUsername(), expectedUser.getUsername());
         Assert.assertEquals(newUser.getFirstName(), expectedUser.getFirstName());
