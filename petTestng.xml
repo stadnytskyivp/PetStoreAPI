@@ -9,7 +9,7 @@
             <class name="petStoreTests.pet.FindByStatusTest"/>
             <class name="petStoreTests.pet.FindNegativeTest"/>
             <class name="petStoreTests.pet.FindTest"/>
-            <class name="petStoreTests.pet.UpdateTest"/>
+            <class name="petStoreTests.pet.UpdatePetTest"/>
             <class name="petStoreTests.pet.AddPhotoTest"/>
         </classes>
     </test>

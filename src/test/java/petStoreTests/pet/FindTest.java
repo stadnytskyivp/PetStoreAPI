@@ -3,26 +3,22 @@ package petStoreTests.pet;
 import client.PetClient;
 import data.DataSet;
 import dto.requests.pet.Pet;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import petStoreTests.AbstractTest;
-
-import java.io.IOException;
 
 import static client.PetClient.postPet;
 import static data.DataSet.addingPet;
 
-public class FindTest extends AbstractTest {
-
+public class FindTest {
     @Description("Verify that we are getting pets by id")
     @Test
-    public void getPetTest() throws IOException {
-        LOGGER.info("BEFORE TEST adding a petStoreTests.pet");
+    public void getPetTest() {
+        Allure.step("Before test adding a pet");
         postPet(addingPet());
-        LOGGER.info("BEFORE TEST petStoreTests.pet added");
 
-        LOGGER.info("START TEST find petStoreTests.pet in the petStoreTests.store");
+        Allure.step("Start test find pet in the store data base");
         Pet pet = PetClient.getPetById(DataSet.addingPet().getId());
 
         Assert.assertEquals(pet.getId(), addingPet().getId());
@@ -31,7 +27,5 @@ public class FindTest extends AbstractTest {
         Assert.assertEquals(pet.getCategory(), addingPet().getCategory());
         Assert.assertEquals(pet.getPhotoUrls().toString(), addingPet().getPhotoUrls().toString());
         Assert.assertEquals(pet.getTags().getClass(), pet.getTags().getClass());
-        LOGGER.info("END TEST");
     }
-
 }

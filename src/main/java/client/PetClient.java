@@ -1,8 +1,8 @@
 package client;
 
-import enums.EStatus;
-import dto.requests.pet.Pet;
 import dto.requests.ResponseInfo;
+import dto.requests.pet.Pet;
+import enums.EStatus;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,17 +10,18 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Formatter;
+import java.util.List;
 
-public class PetClient extends Client {
+public class PetClient extends BaseClient {
     final private static String PET_ENDPOINT = "/v2/pet/";
     final private static String PET_FIND_BY_STATUS_ENDPOINT = PET_ENDPOINT + "findByStatus?status=";
     final private static String PET_IMAGE_UPLOAD_ENDPOINT = PET_ENDPOINT + "%s/uploadImage";    // setting here pet ID
 
 
-    @Step("Adding pet to the store")
-    public static Pet postPet(Pet petToPost) throws IOException {
+    @Step("Sending POST request to /pet")
+    public static Pet postPet(Pet petToPost) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq())
@@ -40,8 +41,8 @@ public class PetClient extends Client {
             .as(Pet.class);
     }
 
-    @Step("Getting pet by ID {0}")
-    public static Pet getPetById(long petId) throws IOException {
+    @Step("Sending GET request to /pet by ID {0}")
+    public static Pet getPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -59,8 +60,8 @@ public class PetClient extends Client {
             .as(Pet.class);
     }
 
-    @Step("Getting non existing pet by ID {0}")
-    public static ResponseInfo getNonExistingPetById(long petId) throws IOException {
+    @Step("Sending GET request  for non existent pet to /pet by ID {0}")
+    public static ResponseInfo getNonExistingPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -78,8 +79,8 @@ public class PetClient extends Client {
             .as(ResponseInfo.class);
     }
 
-    @Step("Deleting pet by ID {0}")
-    public static ResponseInfo deletePetById(long petId) throws IOException {
+    @Step("Sending DELETE request to /pet by ID {0}")
+    public static ResponseInfo deletePetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -98,8 +99,8 @@ public class PetClient extends Client {
             .as(ResponseInfo.class);
     }
 
-    @Step("Deleting defunct pet by ID {0}")
-    public static Response deleteNonExistingPetById(long petId) throws IOException {
+    @Step("Sending DELETE request for non existent order to /pet by ID {0}")
+    public static Response deleteNonExistingPetById(long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -117,8 +118,8 @@ public class PetClient extends Client {
             .response();
     }
 
-    @Step("Getting list of pets with specific status {0}")
-    public static List<Pet> getPetByStatus(EStatus petStatus) throws IOException {
+    @Step("Sending GET request to /pet/findByStatus by pet status {0}")
+    public static List<Pet> getPetByStatus(EStatus petStatus) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildReq());
@@ -135,12 +136,12 @@ public class PetClient extends Client {
             .as(Pet[].class));
     }
 
-    @Step("Adding pet photo to the pet")
-    public static ResponseInfo postPetPicture(Long petId) throws IOException {
+    @Step("Sending POST request to /pet/petId/uploadImage by pet Id {0}")
+    public static ResponseInfo postPetPicture(Long petId) {
         LOGGER.debug("sending request");
         RequestSpecification res = RestAssured.given()
             .spec(buildUncheckedReq())
-            .multiPart("file", new File(System.getProperty("petStoreTests.user.dir") +
+            .multiPart("file", new File(System.getProperty("user.dir") +
                 "/img/imp.png"));
 
         LOGGER.debug("expecting response");
@@ -155,5 +156,26 @@ public class PetClient extends Client {
             .extract()
             .response()
             .as(ResponseInfo.class);
+    }
+
+    @Step("Sending PUT request to /pet")
+    public static Pet putPet(Pet petToPut) {
+        LOGGER.debug("sending request");
+        RequestSpecification res = RestAssured.given()
+            .spec(buildReq())
+            .body(petToPut);
+
+        LOGGER.debug("expecting response");
+        return res
+            .when()
+            .put(PET_ENDPOINT)
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .spec(buildRes())
+            .log()
+            .body()
+            .extract()
+            .response()
+            .as(Pet.class);
     }
 }

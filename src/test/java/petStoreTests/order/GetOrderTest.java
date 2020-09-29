@@ -1,28 +1,23 @@
-package petStoreTests.store;
+package petStoreTests.order;
 
 import client.StoreClient;
 import data.DataSet;
 import dto.requests.store.Order;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import petStoreTests.AbstractTest;
-
-import java.io.IOException;
 
 import static data.DataSet.addingOrder;
 
-public class GetOrderTest extends AbstractTest {
-
+public class GetOrderTest {
     @Description("Verify that we are getting order by id")
     @Test
-    public void getOrderTest() throws IOException {
-
-        LOGGER.info("BEFORE TEST adding a order");
+    public void getOrderTest() {
+        Allure.step("Before test adding a order");
         StoreClient.postOrder(addingOrder());
-        LOGGER.info("BEFORE TEST order added");
 
-        LOGGER.info("START TEST find order in the store");
+        Allure.step("Start test find order in the store");
         Order response = StoreClient.getOrderById(DataSet.addingOrder().getId());
 
         Assert.assertEquals(response.getId(), addingOrder().getId());
@@ -31,6 +26,5 @@ public class GetOrderTest extends AbstractTest {
         Assert.assertEquals(response.getShipDate(), addingOrder().getShipDate());
         Assert.assertEquals(response.getStatus(), addingOrder().getStatus());
         Assert.assertEquals(response.isComplete(), addingOrder().isComplete());
-        LOGGER.info("END TEST");
     }
 }

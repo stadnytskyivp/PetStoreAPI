@@ -4,13 +4,13 @@ import dto.requests.pet.Pet;
 import dto.requests.pet.PetCategory;
 import dto.requests.ResponseInfo;
 import dto.requests.store.Order;
+import dto.requests.user.User;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class DataSet {
-
     public static Pet addingPet() {
         PetCategory petCategory = new PetCategory().setId(666).setName("Imp");
 
@@ -26,7 +26,7 @@ public class DataSet {
             .setStatus("available");
     }
 
-    public static ResponseInfo messageDelResponse() {
+    public static ResponseInfo messageUnknownResponse() {
         return new ResponseInfo()
             .setCode(200)
             .setType("unknown")
@@ -50,4 +50,14 @@ public class DataSet {
             .setComplete(true);
     }
 
+    public static User addingUser() {
+        return new User()
+            .setUsername(ReusableMethods.getRandomUsername())
+            .setFirstName("Carl")
+            .setLastName("Jonson")
+            .setEmail("CJ@gmail.com")
+            .setPassword("123456")
+            .setPhone("+380931488666")
+            .setUserStatus(1);
+    }
 }

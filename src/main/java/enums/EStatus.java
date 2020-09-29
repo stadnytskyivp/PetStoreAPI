@@ -1,7 +1,6 @@
 package enums;
 
 public enum EStatus {
-
     AVAILABLE("available"),
     PENDING("pending"),
     SOLD("sold");
