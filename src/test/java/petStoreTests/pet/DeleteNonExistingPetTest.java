@@ -17,7 +17,7 @@ public class DeleteNonExistingPetTest {
         Allure.step("Precondition deleting pet to insure that there won't be any pet with our petID");
         deleteNonExistingPetById(addingPet().getId());
 
-        Allure.step("Start test try to delete defunct pet");
+        Allure.step("Start test try to delete non existing pet");
         Response response = PetClient.deleteNonExistingPetById(addingPet().getId());
 
         Assert.assertTrue(response.asString().trim().isEmpty());

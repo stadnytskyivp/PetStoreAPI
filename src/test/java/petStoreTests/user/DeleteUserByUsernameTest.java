@@ -18,7 +18,7 @@ public class DeleteUserByUsernameTest {
         User user = DataSet.addingUser();
         UserClient.postUser(user);
 
-        Allure.step("Start test user from the store");
+        Allure.step("Start test delete user from the store");
         ResponseInfo response = UserClient.deleteUserByUsername(user.getUsername());
 
         Assert.assertEquals(response.getCode(), HttpStatus.SC_OK);

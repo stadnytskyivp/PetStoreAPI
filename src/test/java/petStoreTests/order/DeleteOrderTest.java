@@ -17,7 +17,7 @@ public class DeleteOrderTest {
         Allure.step("Before test adding a order");
         StoreClient.postOrder(addingOrder());
 
-        Allure.step("Start tst delete order from the store");
+        Allure.step("Start test delete order from the store");
         ResponseInfo response = StoreClient.deleteOrderById(addingOrder().getId());
 
         Assert.assertNotNull(response);

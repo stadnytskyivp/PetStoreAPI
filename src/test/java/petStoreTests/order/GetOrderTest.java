@@ -14,7 +14,7 @@ public class GetOrderTest {
     @Description("Verify that we are getting order by id")
     @Test
     public void getOrderTest() {
-        Allure.step("Before test adding a order");
+        Allure.step("Before test adding order");
         StoreClient.postOrder(addingOrder());
 
         Allure.step("Start test find order in the store");

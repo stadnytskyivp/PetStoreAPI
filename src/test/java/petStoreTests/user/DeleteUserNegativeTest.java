@@ -11,12 +11,12 @@ public class DeleteUserNegativeTest {
     @Description("Verify that we can't delete non existing user from the store data base")
     @Test
     public void deleteUserTest() {
-        Allure.step("Before test making sure that the base can't delete non existing user");
+        Allure.step("Before test making sure that our user don't exist");
         User user = DataSet.addingUser();
         UserClient.postUser(user);
         UserClient.deleteUserByUsername(user.getUsername());
 
-        Allure.step("Start test delete non existing user from the store data base");
+        Allure.step("Start test trying to delete non existing user from the store");
         UserClient.deleteNonExistingUser(user.getUsername());   // checking for 404 status code
     }
 }

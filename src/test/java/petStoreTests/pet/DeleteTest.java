@@ -18,7 +18,7 @@ public class DeleteTest {
         Allure.step("Before test adding pet");
         postPet(addingPet());
 
-        Allure.step("Start test pet from the store");
+        Allure.step("Start test delete pet from the store");
         ResponseInfo response = PetClient.deletePetById(addingPet().getId());
 
         Assert.assertNotNull(response);

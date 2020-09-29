@@ -18,7 +18,7 @@ public class FindUserByUsernameTest {
         Allure.step("Before test add user");
         UserClient.postUser(expectedUser);
 
-        Allure.step("Start test find user in the store data base");
+        Allure.step("Start test find user");
         User actualUser = UserClient.getUserByUsername(expectedUser.getUsername());
 
         ReusableMethods.compareUsers(actualUser, expectedUser);

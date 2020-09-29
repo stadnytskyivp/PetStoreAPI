@@ -23,10 +23,10 @@ public class UpdatePetTest {
     @Parameters({"Pet for updating"})
     @Test(dataProvider = "positiveTests")
     public static void updatePetTest(Pet simplePet) {
-        Allure.step("Before test adding a pet");
+        Allure.step("Before test adding pet");
         postPet(addingPet());
 
-        Allure.step("Start test add pet to the store");
+        Allure.step("Start test update pet information");
         Pet response = PetClient.putPet(simplePet);
 
         Assert.assertEquals(response.getName(), simplePet.getName());
