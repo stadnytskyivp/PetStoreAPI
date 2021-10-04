@@ -2,7 +2,6 @@ package data;
 
 import dto.requests.user.User;
 import org.testng.Assert;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -31,5 +30,13 @@ public class ReusableMethods {
         Assert.assertEquals(newUser.getEmail(), expectedUser.getEmail());
         Assert.assertEquals(newUser.getPassword(), expectedUser.getPassword());
         Assert.assertEquals(newUser.getPhone(), expectedUser.getPhone());
+    }
+
+    public static void waiter() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
